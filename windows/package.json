@@ -1,0 +1,35 @@
+{
+  "name": "HybridAI",
+  "version": "1.0.0",
+  "description": "HybridAI",
+  "main": "main.js",
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.ambient.hybridai",
+    "productName": "HybridAI",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*",
+      "!dist/**"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "icon.ico"
+    }
+  },
+  "devDependencies": {
+    "electron": "^43.1.0",
+    "electron-builder": "^26.15.3"
+  },
+  "dependencies": {
+    "electron-store": "^11.0.2"
+  }
+}
