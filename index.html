@@ -474,7 +474,7 @@
         /* ── CAPSULE CHAT CONTROL CONTROL ── */
         .input-area {
             display: flex;
-            padding: 20px 40px 32px 40px;
+            padding: 20px 40px 12px 40px; /* Reduced bottom padding to house disclaimer nicely */
             gap: 16px;
             align-items: center;
             flex-shrink: 0;
@@ -532,6 +532,19 @@
         
         button:active {
             transform: scale(0.96);
+        }
+
+        /* ── INPUT FOOTER DISCLAIMER STYLE ── */
+        .input-disclaimer {
+            font-size: 0.75rem;
+            color: var(--md-on-surface-variant);
+            text-align: center;
+            padding: 0 40px 24px 40px;
+            font-weight: 500;
+            opacity: 0.75;
+            flex-shrink: 0;
+            pointer-events: none;
+            user-select: none;
         }
 
         .error {
@@ -602,7 +615,7 @@
             }
 
             .input-area {
-                padding: 16px 20px 24px 20px;
+                padding: 16px 20px 8px 20px;
                 gap: 10px;
             }
 
@@ -614,6 +627,11 @@
             button {
                 padding: 0 20px;
                 height: 48px;
+            }
+
+            .input-disclaimer {
+                padding: 0 20px 16px 20px;
+                font-size: 0.7rem;
             }
         }
     </style>
@@ -648,6 +666,11 @@
                     <input type="text" id="query" placeholder="Ask Ambient HybridAI..." onkeypress="handleKeyPress(event)">
                 </div>
                 <button onclick="askAI()">⮝</button>
+            </div>
+
+            <!-- DYNAMIC FOOTER DISCLAIMER -->
+            <div class="input-disclaimer">
+                HybridAI is an AI and may make mistakes. Double check for responses.
             </div>
         </div>
     </div>
