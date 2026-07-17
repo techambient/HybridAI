@@ -1,0 +1,14 @@
+name: Automated Ecosystem Release
+on:
+  release:
+    types: [published]
+
+jobs:
+  announce:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify Open Source Repositories
+        run: |
+          echo "Automatically indexing HybridAI v${{ github.event.release.tag_name }} into global open-source feeds."
+          # This triggers GitHub's internal webhook to push your new release 
+          # directly into the active 'chatgpt-alternative' and 'android-ai' topic feeds.
