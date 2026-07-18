@@ -4,7 +4,7 @@
 
 # Ambient HybridAI
 
-### Open source AI chatbot powered by Ambient HybridAI Intelligence 1.0
+### Open source AI chatbot powered by Ambient HybridAI Intelligence 2.0
 
 Modern, beautiful and free unlimited latest model usage AI assistant for Windows devices, Android phones, tablets and foldables.
 
@@ -20,7 +20,7 @@ Modern, beautiful and free unlimited latest model usage AI assistant for Windows
 
 Ambient HybridAI is a modern open source AI chatbot designed for Android and Windows.
 
-Powered by **Ambient HybridAI Intelligence 1.0**, it provides a fast, beautiful and intuitive AI experience while supporting multiple AI providers through a clean Material 3 Expressive interface.
+Powered by **Ambient HybridAI Intelligence 2.0**, it provides a fast, beautiful and intuitive AI experience while supporting multiple AI providers through a clean Material 3 Expressive interface.
 
 Whether you're asking questions, writing documents, generating ideas or solving problems, Ambient HybridAI delivers an elegant AI experience designed specifically for Android and Windows.
 
@@ -28,7 +28,7 @@ Whether you're asking questions, writing documents, generating ideas or solving 
 
 # ✨ Features
 
-- 🤖 Ambient HybridAI Intelligence 1.0
+- 🤖 Ambient HybridAI Intelligence 2.0
 - 💬 Modern AI Chatbot
 - 🎨 Google Material 3 Expressive UI
 - 📱 Optimised for phones
@@ -91,7 +91,7 @@ Open the project using Android Studio / Electron (Windows version) and press **R
 
 # 🧠 Ambient HybridAI Intelligence 1.0
 
-Ambient HybridAI Intelligence 1.0 is the intelligence engine behind Ambient HybridAI.
+Ambient HybridAI Intelligence 2.0 is the intelligence engine behind Ambient HybridAI.
 
 Features include:
 
@@ -124,7 +124,7 @@ Unlike many AI applications, Ambient HybridAI focuses on:
 - Clean UI
 - Performance
 - Open Source
-- Modern Android / Windows experience
+- Modern Web, Android & Windows experience
 - No unnecessary permissions
 - Unlimited latest model usage
 
@@ -161,6 +161,6 @@ See [LICENSE](LICENSE) for more information.
 
 <div align="center">
 
-Made with ❤️ by Ambient
+Made with ❤️ by techambient (Ambient)
 
 </div>
