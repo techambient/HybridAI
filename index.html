@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ambient HybridAI Interface</title>
+    <title>Ambient HybridAI</title>
     <style>
         /* ── NEXT-GEN AMBIENT ULTRA-MODERN VARIABLE CONFIGURATION ── */
         :root {
@@ -16,6 +16,7 @@
             --inner-border: rgba(0, 0, 0, 0.08);
             
             --md-bg: #f3f5f9;
+            --md-bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
             --md-surface: rgba(255, 255, 255, 0.7);
             --md-surface-variant: rgba(0, 0, 0, 0.03);
             --md-on-surface: #1a1a1e;
@@ -40,6 +41,7 @@
                 --inner-border: rgba(255, 255, 255, 0.07);
                 
                 --md-bg: #0d0d0f;
+                --md-bg-gradient: linear-gradient(135deg, #0d0d0f 0%, #16161a 100%);
                 --md-surface: rgba(26, 26, 30, 0.6);
                 --md-surface-variant: rgba(255, 255, 255, 0.04);
                 --md-on-surface: #f1f1f5;
@@ -59,6 +61,7 @@
 
         body {
             font-family: var(--md-font);
+            background: var(--md-bg-gradient);
             background-color: var(--md-bg);
             color: var(--md-on-surface);
             display: flex;
@@ -68,7 +71,7 @@
             height: 100vh;
             padding: 24px;
             overflow: hidden;
-            transition: background-color 0.5s ease;
+            transition: background 0.5s ease, background-color 0.5s ease;
             position: relative;
         }
 
@@ -653,7 +656,7 @@
         <div class="main-chat-area">
             <div class="header">
                 <div class="header-text">
-                    <h1>Ambient HybridAI</h1>
+                    <h1>Ambient HybridAI v2</h1>
                     <p>Free & Open Source AI Chatbot</p>
                 </div>
                 <button class="menu-toggle-btn" onclick="toggleSidebar(true)">☰</button>
@@ -663,7 +666,7 @@
             
             <div class="input-area">
                 <div class="input-wrapper">
-                    <input type="text" id="query" placeholder="Ask Ambient HybridAI..." onkeypress="handleKeyPress(event)">
+                    <input type="text" id="query" placeholder="Ask Ambient HybridAI v2..." onkeypress="handleKeyPress(event)">
                 </div>
                 <button onclick="askAI()">⮝</button>
             </div>
@@ -693,7 +696,7 @@
             <div class="bot-content-wrapper">
                 <div class="bot-text-payload">Hi, HybridAI user! How can I help you today?</div>
                 <div class="bot-meta-footer">
-                    <span class="source-tag">System Initialization</span>
+                    <span class="source-tag">AI Initialization</span>
                     <button class="copy-response-btn" onclick="copyResponseText(this)">Copy</button>
                 </div>
             </div>
@@ -731,7 +734,7 @@
     function startNewChat() {
         currentSessionId = "chat-" + Date.now();
         allSessions[currentSessionId] = {
-            title: "New Chat Thread",
+            title: "New Chat",
             logs: systemGreetingHtml
         };
         saveToLocalStorage();
@@ -798,7 +801,7 @@
     function handleRenameOption() {
         if (!menuTargetSessionId || !allSessions[menuTargetSessionId]) return;
         const historicalTitle = allSessions[menuTargetSessionId].title;
-        const newTitle = prompt("Rename Chat Thread:", historicalTitle);
+        const newTitle = prompt("Rename this chat:", historicalTitle);
         
         if (newTitle && newTitle.trim() !== "") {
             allSessions[menuTargetSessionId].title = newTitle.trim();
@@ -867,7 +870,7 @@
         
         if (!question) return;
 
-        if (allSessions[currentSessionId].title === "New Chat Thread") {
+        if (allSessions[currentSessionId].title === "New Chat") {
             allSessions[currentSessionId].title = question.length > 22 ? question.substring(0, 22) + "..." : question;
         }
 
