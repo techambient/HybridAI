@@ -478,7 +478,7 @@
         .input-area {
             display: flex;
             padding: 20px 40px 12px 40px; /* Reduced bottom padding to house disclaimer nicely */
-            gap: 16px;
+            gap: 12px;
             align-items: center;
             flex-shrink: 0;
         }
@@ -535,6 +535,41 @@
         
         button:active {
             transform: scale(0.96);
+        }
+
+        /* Dynamic Mic Button Custom Specifications */
+        .mic-btn {
+            background: var(--glass-surface);
+            color: var(--md-on-surface);
+            border: 1px solid var(--inner-border);
+            padding: 0;
+            width: 56px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
+
+        .mic-btn:hover {
+            background: var(--md-surface-variant);
+            color: var(--md-on-surface);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+        }
+
+        .mic-btn.listening {
+            background: #d9383a;
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(217, 56, 58, 0.3);
+            animation: micPulse 1.5s infinite alternate ease-in-out;
+        }
+
+        .mic-btn.listening:hover {
+            background: #e54b4d;
+            color: white;
+            box-shadow: 0 8px 24px rgba(217, 56, 58, 0.4);
+        }
+
+        @keyframes micPulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.04); }
         }
 
         /* ── INPUT FOOTER DISCLAIMER STYLE ── */
@@ -619,7 +654,7 @@
 
             .input-area {
                 padding: 16px 20px 8px 20px;
-                gap: 10px;
+                gap: 8px;
             }
 
             input[type="text"] {
@@ -630,6 +665,11 @@
             button {
                 padding: 0 20px;
                 height: 48px;
+            }
+
+            .mic-btn {
+                width: 48px;
+                padding: 0;
             }
 
             .input-disclaimer {
@@ -668,6 +708,8 @@
                 <div class="input-wrapper">
                     <input type="text" id="query" placeholder="Ask Ambient HybridAI v2..." onkeypress="handleKeyPress(event)">
                 </div>
+                <!-- MICROPHONE SPEECH RECOGNITION INTERACTION BUTTON -->
+                <button id="micBtn" class="mic-btn" onclick="toggleSpeechRecognition()" title="Voice Input">🎙</button>
                 <button onclick="askAI()">⮝</button>
             </div>
 
@@ -691,6 +733,10 @@
     let currentSessionId = "";
     let menuTargetSessionId = ""; 
 
+    // Speech Engine Instance Global Configurations
+    let speechRecognitionInstance = null;
+    let isSpeechEngineActive = false;
+
     const systemGreetingHtml = `
         <div class="message bot">
             <div class="bot-content-wrapper">
@@ -707,6 +753,7 @@
         document.getElementById("query").focus();
         initializeWorkspace();
         setupGlobalClickHandlers();
+        initializeSpeechEngine();
     };
 
     function toggleSidebar(shouldShow) {
@@ -863,7 +910,84 @@
         });
     }
 
+    /* ── WEB SPEECH ENGINE CORE LOGIC INTERACTION INTEGRATION ── */
+    function initializeSpeechEngine() {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+            console.warn("Web Speech API is not natively supported by this browser client context.");
+            document.getElementById("micBtn").style.display = "none";
+            return;
+        }
+
+        speechRecognitionInstance = new SpeechRecognition();
+        speechRecognitionInstance.continuous = true;
+        speechRecognitionInstance.interimResults = true;
+        speechRecognitionInstance.lang = 'en-US';
+
+        let baseText = "";
+
+        speechRecognitionInstance.onstart = () => {
+            isSpeechEngineActive = true;
+            const micBtn = document.getElementById("micBtn");
+            micBtn.classList.add("listening");
+            micBtn.innerText = "⏹";
+            baseText = document.getElementById("query").value;
+        };
+
+        speechRecognitionInstance.onresult = (event) => {
+            let realTimeTranscripts = "";
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
+                if (event.results[i].isFinal) {
+                    baseText += (baseText.length > 0 && !baseText.endsWith(" ") ? " " : "") + event.results[i][0].transcript.trim();
+                } else {
+                    realTimeTranscripts += event.results[i][0].transcript;
+                }
+            }
+            
+            let constructedDisplay = baseText;
+            if (realTimeTranscripts.length > 0) {
+                constructedDisplay += (constructedDisplay.length > 0 && !constructedDisplay.endsWith(" ") ? " " : "") + realTimeTranscripts;
+            }
+            
+            document.getElementById("query").value = constructedDisplay;
+        };
+
+        speechRecognitionInstance.onerror = (event) => {
+            console.error("Speech Recognition Engine Error: ", event.error);
+            stopTranscriptionInstance();
+        };
+
+        speechRecognitionInstance.onend = () => {
+            stopTranscriptionInstance();
+        };
+    }
+
+    function toggleSpeechRecognition() {
+        if (!speechRecognitionInstance) return;
+        
+        if (!isSpeechEngineActive) {
+            // Prompt dynamic authorization context if needed, then initialize capture stream
+            speechRecognitionInstance.start();
+        } else {
+            speechRecognitionInstance.stop();
+        }
+    }
+
+    function stopTranscriptionInstance() {
+        isSpeechEngineActive = false;
+        const micBtn = document.getElementById("micBtn");
+        if (micBtn) {
+            micBtn.classList.remove("listening");
+            micBtn.innerText = "🎙";
+        }
+    }
+
     async function askAI() {
+        // Automatically close listening capture streams if text payload is submitted
+        if (isSpeechEngineActive && speechRecognitionInstance) {
+            speechRecognitionInstance.stop();
+        }
+
         const inputField = document.getElementById("query");
         const chatbox = document.getElementById("chatbox");
         const question = inputField.value.trim();
