@@ -45,6 +45,8 @@ Whether you're asking questions, writing documents, generating ideas or solving 
 
 # 📸 Screenshots
 
+<img src="screenshots/web.png">
+
 | Phone | Tablet |
 |-------|---------|
 | <img src="screenshots/phone1.png" width="250"> | <img src="screenshots/tablet1.png" width="500"> |
