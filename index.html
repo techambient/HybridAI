@@ -171,6 +171,14 @@
             box-shadow: 0 8px 20px var(--md-primary-container);
         }
 
+        .new-chat-btn:hover {
+            transform: translateY(-2px);
+            background: var(--md-primary);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 8px 20px var(--md-primary-container);
+        }
+
         .history-title {
             font-size: 0.72rem;
             text-transform: uppercase;
@@ -444,8 +452,8 @@
             border: 1px solid var(--inner-border);
         }
 
-        /* Copy Button next to sources layout */
-        .copy-response-btn {
+        /* Copy & Hear Button next to sources layout */
+        .copy-response-btn, .tts-response-btn {
             background: var(--md-surface-variant);
             border: 1px solid var(--inner-border);
             color: var(--md-on-surface-variant);
@@ -462,7 +470,7 @@
             transition: all 0.2s ease;
         }
 
-        .copy-response-btn:hover {
+        .copy-response-btn:hover, .tts-response-btn:hover {
             background: var(--md-primary-container);
             color: var(--md-on-primary-container);
             transform: none;
@@ -470,8 +478,14 @@
             box-shadow: none;
         }
 
-        .copy-response-btn:active {
+        .copy-response-btn:active, .tts-response-btn:active {
             transform: scale(0.95);
+        }
+
+        .tts-response-btn.playing {
+            background: rgba(219, 68, 85, 0.15);
+            color: #d9383a;
+            border-color: rgba(217, 56, 58, 0.2);
         }
 
         /* ── CAPSULE CHAT CONTROL CONTROL ── */
@@ -690,6 +704,7 @@
     let allSessions = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
     let currentSessionId = "";
     let menuTargetSessionId = ""; 
+    let currentUtterance = null; // Track currently executing speech object
 
     const systemGreetingHtml = `
         <div class="message bot">
@@ -698,6 +713,7 @@
                 <div class="bot-meta-footer">
                     <span class="source-tag">AI Initialization</span>
                     <button class="copy-response-btn" onclick="copyResponseText(this)">Copy</button>
+                    <button class="tts-response-btn" onclick="toggleSpeech(this)">Hear</button>
                 </div>
             </div>
         </div>
@@ -732,6 +748,8 @@
     }
 
     function startNewChat() {
+        // Force stop speech engine if active before jumping views
+        window.speechSynthesis.cancel();
         currentSessionId = "chat-" + Date.now();
         allSessions[currentSessionId] = {
             title: "New Chat",
@@ -743,6 +761,7 @@
     }
 
     function loadSession(id) {
+        window.speechSynthesis.cancel();
         currentSessionId = id;
         const chatbox = document.getElementById("chatbox");
         chatbox.innerHTML = allSessions[id].logs;
@@ -863,6 +882,51 @@
         });
     }
 
+    /* Web Speech API Core Engine Controller (Hear / Stop Interaction) */
+    function toggleSpeech(buttonElement) {
+        const messageContainer = buttonElement.closest('.bot-content-wrapper');
+        if (!messageContainer) return;
+
+        const textPayload = messageContainer.querySelector('.bot-text-payload');
+        if (!textPayload) return;
+
+        const textToSpeak = textPayload.innerText || textPayload.textContent;
+
+        // If this exact element is already playing text-to-speech, interrupt and stop it.
+        if (buttonElement.classList.contains('playing')) {
+            window.speechSynthesis.cancel();
+            return;
+        }
+
+        // Clean up visual tags of any other hear buttons currently marked playing
+        document.querySelectorAll('.tts-response-btn.playing').forEach(btn => {
+            btn.classList.remove('playing');
+            btn.innerText = "Hear";
+        });
+
+        // Cancel previous utterances before executing next stream
+        window.speechSynthesis.cancel();
+
+        currentUtterance = new SpeechSynthesisUtterance(textToSpeak);
+        
+        currentUtterance.onstart = () => {
+            buttonElement.classList.add('playing');
+            buttonElement.innerText = "Stop";
+        };
+
+        currentUtterance.onend = () => {
+            buttonElement.classList.remove('playing');
+            buttonElement.innerText = "Hear";
+        };
+
+        currentUtterance.onerror = () => {
+            buttonElement.classList.remove('playing');
+            buttonElement.innerText = "Hear";
+        };
+
+        window.speechSynthesis.speak(currentUtterance);
+    }
+
     async function askAI() {
         const inputField = document.getElementById("query");
         const chatbox = document.getElementById("chatbox");
@@ -905,6 +969,7 @@
                         <div class="bot-meta-footer">
                             <span class="source-tag">Source: ${sourceLabel}</span>
                             <button class="copy-response-btn" onclick="copyResponseText(this)">Copy</button>
+                            <button class="tts-response-btn" onclick="toggleSpeech(this)">Hear</button>
                         </div>
                     </div>
                 </div>
@@ -921,6 +986,7 @@
                         <div class="bot-meta-footer">
                             <span class="source-tag">Network Failure</span>
                             <button class="copy-response-btn" onclick="copyResponseText(this)">Copy</button>
+                            <button class="tts-response-btn" onclick="toggleSpeech(this)">Hear</button>
                         </div>
                     </div>
                 </div>
