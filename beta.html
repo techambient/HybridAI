@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ambient HybridAI</title>
+    <style>
+        /* ── NEXT-GEN AMBIENT ULTRA-MODERN VARIABLE CONFIGURATION ── */
+        :root {
+            color-scheme: light dark;
+            
+            /* Light Glass Theme */
+            --glass-bg: rgba(255, 255, 255, 0.45);
+            --glass-surface: rgba(255, 255, 255, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --inner-border: rgba(0, 0, 0, 0.08);
+            
+            --md-bg: #f3f5f9;
+            --md-bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            --md-surface: rgba(255, 255, 255, 0.7);
+            --md-surface-variant: rgba(0, 0, 0, 0.03);
+            --md-on-surface: #1a1a1e;
+            --md-on-surface-variant: #5a5d63;
+            --md-primary: #0056dc;
+            --md-primary-container: rgba(0, 86, 220, 0.08);
+            --md-on-primary-container: #003fa3;
+            --md-border: rgba(0, 0, 0, 0.08);
+            --md-font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --md-radius-input: 24px;
+            --md-radius-msg: 20px;
+            --blur-intensity: 20px;
+            --glow-color: cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                /* Dark Glass Theme */
+                --glass-bg: rgba(18, 18, 20, 0.45);
+                --glass-surface: rgba(30, 30, 34, 0.55);
+                --glass-border: rgba(255, 255, 255, 0.04);
+                --inner-border: rgba(255, 255, 255, 0.07);
+                
+                --md-bg: #0d0d0f;
+                --md-bg-gradient: linear-gradient(135deg, #0d0d0f 0%, #16161a 100%);
+                --md-surface: rgba(26, 26, 30, 0.6);
+                --md-surface-variant: rgba(255, 255, 255, 0.04);
+                --md-on-surface: #f1f1f5;
+                --md-on-surface-variant: #9ea2ac;
+                --md-primary: #5992ff;
+                --md-primary-container: rgba(89, 146, 255, 0.15);
+                --md-on-primary-container: #d2e1ff;
+                --md-border: rgba(255, 255, 255, 0.08);
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--md-font);
+            background: var(--md-bg-gradient);
+            background-color: var(--md-bg);
+            color: var(--md-on-surface);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 24px;
+            overflow: hidden;
+            transition: background 0.5s ease, background-color 0.5s ease;
+            position: relative;
+        }
+
+        /* Ambient Dynamic Background Glows */
+        body::before, body::after {
+            content: "";
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.18;
+            z-index: -1;
+            pointer-events: none;
+            animation: pulseGlow 12s infinite alternate ease-in-out;
+        }
+        body::before {
+            top: 10%;
+            left: 15%;
+            background: radial-gradient(circle, var(--md-primary) 0%, transparent 70%);
+        }
+        body::after {
+            bottom: 10%;
+            right: 15%;
+            background: radial-gradient(circle, #8a2be2 0%, transparent 70%);
+            animation-delay: -6s;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, 20px) scale(1.15); }
+        }
+
+        /* ── PREMIUM GLASS CONDUIT CONTAINER ── */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            height: 88vh;
+            display: flex;
+            flex-direction: row;
+            background: var(--glass-surface);
+            backdrop-filter: blur(var(--blur-intensity)) saturate(190%);
+            -webkit-backdrop-filter: blur(var(--blur-intensity)) saturate(190%);
+            border-radius: 32px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            position: relative;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.08), 
+                        inset 0 1px 0 var(--glass-border);
+            animation: containerReveal 0.8s var(--glow-color);
+        }
+
+        @keyframes containerReveal {
+            from { opacity: 0; transform: translateY(20px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* ── GLASS LAB HISTORY SIDEBAR ── */
+        .sidebar {
+            width: 280px;
+            background-color: rgba(0, 0, 0, 0.015);
+            border-right: 1px solid var(--inner-border);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            padding: 24px 18px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 10;
+        }
+
+        .new-chat-btn {
+            background: var(--glass-surface);
+            color: var(--md-on-surface);
+            border: 1px solid var(--inner-border);
+            border-radius: var(--md-radius-input);
+            padding: 14px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            height: auto;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            transition: all 0.3s var(--glow-color);
+        }
+
+        .new-chat-btn:hover {
+            transform: translateY(-2px);
+            background: var(--md-primary);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 8px 20px var(--md-primary-container);
+        }
+
+        .history-title {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--md-on-surface-variant);
+            margin-bottom: 12px;
+            padding-left: 12px;
+            font-weight: 700;
+            opacity: 0.8;
+        }
+
+        .history-list {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding-right: 4px;
+        }
+
+        .history-item {
+            padding: 12px 16px;
+            border-radius: 16px;
+            font-size: 0.9rem;
+            color: var(--md-on-surface);
+            cursor: pointer;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: all 0.25s ease;
+            user-select: none;
+            border: 1px solid transparent;
+        }
+
+        .history-item:hover {
+            background-color: var(--md-surface-variant);
+            padding-left: 20px;
+        }
+
+        .history-item.active {
+            background-color: var(--md-primary-container);
+            color: var(--md-on-primary-container);
+            font-weight: 600;
+            border-color: rgba(var(--md-primary), 0.15);
+            backdrop-filter: blur(5px);
+        }
+
+        /* ── ULTRA-CLEAN GLASS CONTEXT MENU ── */
+        .context-menu {
+            position: fixed;
+            background: var(--glass-surface);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            box-shadow: 0 12px 36px rgba(0,0,0,0.12);
+            display: none;
+            flex-direction: column;
+            padding: 6px;
+            z-index: 1000;
+            min-width: 150px;
+            transform: scale(0.95);
+            opacity: 0;
+            transition: transform 0.15s var(--glow-color), opacity 0.15s ease;
+        }
+        
+        .context-menu.active {
+            display: flex;
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .context-menu-item {
+            padding: 10px 16px;
+            font-size: 0.88rem;
+            color: var(--md-on-surface);
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        .context-menu-item:hover {
+            background-color: var(--md-primary-container);
+            color: var(--md-on-primary-container);
+        }
+
+        .context-menu-item.delete-item {
+            color: #d9383a;
+        }
+        .context-menu-item.delete-item:hover {
+            background-color: rgba(217, 56, 58, 0.1);
+        }
+
+        /* ── MAIN CHAT ARENA WORKSPACE ── */
+        .main-chat-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: transparent;
+            overflow: hidden;
+        }
+
+        /* Minimalist Modern Header */
+        .header {
+            padding: 24px 36px;
+            border-bottom: 1px solid var(--inner-border);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        .header-text h1 {
+            font-size: 1.45rem;
+            font-weight: 600;
+            letter-spacing: -0.4px;
+            color: var(--md-on-surface);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-text h1::before {
+            content: "";
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4285f4 0%, #a8c7fa 50%, #9b51e0 100%);
+            box-shadow: 0 0 12px var(--md-primary);
+        }
+
+        .header-text p {
+            font-size: 0.85rem;
+            color: var(--md-on-surface-variant);
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        /* Responsive Sidebar Dynamic Controls */
+        .menu-toggle-btn {
+            display: none;
+            background: var(--md-surface-variant);
+            border: 1px solid var(--inner-border);
+            color: var(--md-on-surface);
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-toggle-btn:hover {
+            transform: none;
+            filter: brightness(0.95);
+            box-shadow: none;
+        }
+
+        /* Ambient Mobile Darkening Overlay Matrix */
+        .sidebar-overlay {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 5;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* ── CHATBOX PERFORMANCE ENGINE ── */
+        #chatbox {
+            flex: 1;
+            overflow-y: auto;
+            padding: 32px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        #chatbox::-webkit-scrollbar {
+            width: 6px;
+        }
+        #chatbox::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        #chatbox::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 99px;
+        }
+        @media (prefers-color-scheme: dark) {
+            #chatbox::-webkit-scrollbar-thumb {
+                background: rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        .message {
+            max-width: 78%;
+            padding: 16px 22px;
+            line-height: 1.62;
+            font-size: 0.98rem;
+            word-wrap: break-word;
+            animation: cubicMessage 0.4s var(--glow-color) forwards;
+            opacity: 0;
+            transform: translateY(12px);
+        }
+
+        @keyframes cubicMessage {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* User Bubble Soft Fluid pill */
+        .user {
+            background: var(--md-surface);
+            color: var(--md-on-surface);
+            align-self: flex-end;
+            border-radius: var(--md-radius-msg);
+            border-bottom-right-radius: 4px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.03), inset 0 1px 0 var(--glass-border);
+            border: 1px solid var(--inner-border);
+        }
+
+        /* Pure Text Bot Styling with custom indent markers */
+        .bot {
+            background-color: transparent;
+            color: var(--md-on-surface);
+            align-self: flex-start;
+            padding-left: 0;
+            max-width: 88%;
+        }
+
+        /* Response structural wrap container for text & tags layout */
+        .bot-content-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .bot-meta-footer {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .source-tag {
+            display: inline-block;
+            font-size: 0.72rem;
+            color: var(--md-on-surface-variant);
+            background: var(--md-surface-variant);
+            padding: 4px 12px;
+            border-radius: 99px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            border: 1px solid var(--inner-border);
+        }
+
+        /* Copy Button next to sources layout */
+        .copy-response-btn {
+            background: var(--md-surface-variant);
+            border: 1px solid var(--inner-border);
+            color: var(--md-on-surface-variant);
+            padding: 4px 10px;
+            border-radius: 99px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            cursor: pointer;
+            height: auto;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: none;
+            transition: all 0.2s ease;
+        }
+
+        .copy-response-btn:hover {
+            background: var(--md-primary-container);
+            color: var(--md-on-primary-container);
+            transform: none;
+            filter: none;
+            box-shadow: none;
+        }
+
+        .copy-response-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* ── CAPSULE CHAT CONTROL CONTROL ── */
+        .input-area {
+            display: flex;
+            padding: 20px 40px 12px 40px; /* Reduced bottom padding to house disclaimer nicely */
+            gap: 16px;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .input-wrapper {
+            position: relative;
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            background: var(--glass-surface);
+            border: 1px solid var(--inner-border);
+            border-radius: var(--md-radius-input);
+            padding: 18px 28px;
+            color: var(--md-on-surface);
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s var(--glow-color);
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.01);
+        }
+
+        input[type="text"]:focus {
+            background: var(--glass-surface);
+            border-color: var(--md-primary);
+            box-shadow: 0 0 0 4px var(--md-primary-container), inset 0 1px 2px rgba(0,0,0,0.02);
+            transform: scale(1.005);
+        }
+
+        button {
+            background: var(--md-primary);
+            color: white;
+            border: none;
+            border-radius: var(--md-radius-input);
+            padding: 0 28px;
+            height: 56px;
+            font-size: 0.98rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s var(--glow-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 16px var(--md-primary-container);
+        }
+
+        button:hover {
+            filter: brightness(1.1);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px var(--md-primary-container);
+        }
+        
+        button:active {
+            transform: scale(0.96);
+        }
+
+        /* ── INPUT FOOTER DISCLAIMER STYLE ── */
+        .input-disclaimer {
+            font-size: 0.75rem;
+            color: var(--md-on-surface-variant);
+            text-align: center;
+            padding: 0 40px 24px 40px;
+            font-weight: 500;
+            opacity: 0.75;
+            flex-shrink: 0;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .error {
+            color: #b3261e;
+            background: rgba(249, 222, 220, 0.5) !important;
+            border-radius: var(--md-radius-msg);
+            padding: 16px 22px;
+            border: 1px solid rgba(179, 38, 30, 0.2) !important;
+        }
+        .error .source-tag {
+            background-color: #f2b8b5;
+            color: #601410;
+        }
+
+        /* ── MOBILE SYSTEM RESPONSIVE MEDIA QUERIES ── */
+        @media (max-width: 768px) {
+            body {
+                padding: 0;
+            }
+
+            .container {
+                height: 100vh;
+                border-radius: 0;
+                border: none;
+            }
+
+            .sidebar {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                background: var(--glass-surface);
+                backdrop-filter: blur(35px) saturate(190%);
+                -webkit-backdrop-filter: blur(35px) saturate(190%);
+                transform: translateX(-100%);
+                box-shadow: 12px 0 32px rgba(0, 0, 0, 0.05);
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .sidebar-overlay {
+                display: block;
+            }
+
+            .menu-toggle-btn {
+                display: flex;
+            }
+
+            .header {
+                padding: 16px 20px;
+            }
+
+            .header-text h1 {
+                font-size: 1.2rem;
+            }
+
+            #chatbox {
+                padding: 20px;
+                gap: 20px;
+            }
+
+            .message {
+                max-width: 90%;
+                padding: 12px 18px;
+                font-size: 0.95rem;
+            }
+
+            .input-area {
+                padding: 16px 20px 8px 20px;
+                gap: 10px;
+            }
+
+            input[type="text"] {
+                padding: 14px 20px;
+                font-size: 0.95rem;
+            }
+
+            button {
+                padding: 0 20px;
+                height: 48px;
+            }
+
+            .input-disclaimer {
+                padding: 0 20px 16px 20px;
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- BACKGROUND OVERLAY MATRIX FOR RESPONSIVE MENU PANELS -->
+        <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleSidebar(false)"></div>
+
+        <!-- LEFT SIDEBAR: LOCAL CHAT HISTORY -->
+        <div id="sidebar" class="sidebar">
+            <button class="new-chat-btn" onclick="startNewChat(); toggleSidebar(false);">+ New Chat</button>
+            <div class="history-title">Recent Chats</div>
+            <div id="historyList" class="history-list"></div>
+        </div>
+
+        <!-- MAIN WINDOW LAYER -->
+        <div class="main-chat-area">
+            <div class="header">
+                <div class="header-text">
+                    <h1>Ambient HybridAI v2</h1>
+                    <p>Free & Open Source AI Chatbot</p>
+                </div>
+                <button class="menu-toggle-btn" onclick="toggleSidebar(true)">☰</button>
+            </div>
+            
+            <div id="chatbox"></div>
+            
+            <div class="input-area">
+                <div class="input-wrapper">
+                    <input type="text" id="query" placeholder="Ask Ambient HybridAI v2..." onkeypress="handleKeyPress(event)">
+                </div>
+                <button onclick="askAI()">⮝</button>
+            </div>
+
+            <!-- DYNAMIC FOOTER DISCLAIMER -->
+            <div class="input-disclaimer">
+                HybridAI is an AI and may make mistakes. Double check for responses.
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTEXT MENU CONTAINER -->
+    <div id="contextMenu" class="context-menu">
+        <div class="context-menu-item" onclick="handleRenameOption()">Rename</div>
+        <div class="context-menu-item delete-item" onclick="handleDeleteOption()">Delete</div>
+    </div>
+
+<script>
+    // Storage Engine Keys & State Management
+    const STORAGE_KEY = "ambient_hybrid_chats";
+    let allSessions = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+    let currentSessionId = "";
+    let menuTargetSessionId = ""; 
+
+    const systemGreetingHtml = `
+        <div class="message bot">
+            <div class="bot-content-wrapper">
+                <div class="bot-text-payload">Hi, HybridAI user! How can I help you today?</div>
+                <div class="bot-meta-footer">
+                    <span class="source-tag">AI Initialization</span>
+                    <button class="copy-response-btn" onclick="copyResponseText(this)">Copy</button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    window.onload = () => {
+        document.getElementById("query").focus();
+        initializeWorkspace();
+        setupGlobalClickHandlers();
+    };
+
+    function toggleSidebar(shouldShow) {
+        const sidebar = document.getElementById("sidebar");
+        const overlay = document.getElementById("sidebarOverlay");
+        if (shouldShow) {
+            sidebar.classList.add("active");
+            overlay.classList.add("active");
+        } else {
+            sidebar.classList.remove("active");
+            overlay.classList.remove("active");
+        }
+    }
+
+    function initializeWorkspace() {
+        const sessionsKeys = Object.keys(allSessions);
+        if (sessionsKeys.length > 0) {
+            loadSession(sessionsKeys[sessionsKeys.length - 1]);
+        } else {
+            startNewChat();
+        }
+        renderSidebarList();
+    }
+
+    function startNewChat() {
+        currentSessionId = "chat-" + Date.now();
+        allSessions[currentSessionId] = {
+            title: "New Chat",
+            logs: systemGreetingHtml
+        };
+        saveToLocalStorage();
+        loadSession(currentSessionId);
+        renderSidebarList();
+    }
+
+    function loadSession(id) {
+        currentSessionId = id;
+        const chatbox = document.getElementById("chatbox");
+        chatbox.innerHTML = allSessions[id].logs;
+        chatbox.scrollTop = chatbox.scrollHeight;
+        renderSidebarList();
+    }
+
+    function saveToLocalStorage() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(allSessions));
+    }
+
+    function renderSidebarList() {
+        const listContainer = document.getElementById("historyList");
+        listContainer.innerHTML = "";
+        
+        Object.keys(allSessions).reverse().forEach(id => {
+            const item = document.createElement("div");
+            item.className = `history-item ${id === currentSessionId ? 'active' : ''}`;
+            item.innerText = allSessions[id].title;
+            
+            item.onclick = () => {
+                loadSession(id);
+                toggleSidebar(false); // Close mobile tray navigation automatically upon choice
+            };
+            
+            item.oncontextmenu = (e) => {
+                e.preventDefault();
+                showContextMenu(e, id);
+            };
+            
+            listContainer.appendChild(item);
+        });
+    }
+
+    function showContextMenu(e, sessionId) {
+        const menu = document.getElementById("contextMenu");
+        menuTargetSessionId = sessionId;
+        menu.style.left = `${e.clientX}px`;
+        menu.style.top = `${e.clientY}px`;
+        menu.classList.add("active");
+    }
+
+    function hideContextMenu() {
+        document.getElementById("contextMenu").classList.remove("active");
+    }
+
+    function setupGlobalClickHandlers() {
+        document.addEventListener("click", () => hideContextMenu());
+        document.addEventListener("contextmenu", (e) => {
+            if (!e.target.classList.contains('history-item')) {
+                hideContextMenu();
+            }
+        });
+    }
+
+    function handleRenameOption() {
+        if (!menuTargetSessionId || !allSessions[menuTargetSessionId]) return;
+        const historicalTitle = allSessions[menuTargetSessionId].title;
+        const newTitle = prompt("Rename this chat:", historicalTitle);
+        
+        if (newTitle && newTitle.trim() !== "") {
+            allSessions[menuTargetSessionId].title = newTitle.trim();
+            saveToLocalStorage();
+            renderSidebarList();
+        }
+        hideContextMenu();
+    }
+
+    function handleDeleteOption() {
+        if (!menuTargetSessionId || !allSessions[menuTargetSessionId]) return;
+        const confirmClear = confirm(`Are you sure you want to delete "${allSessions[menuTargetSessionId].title}"?`);
+        
+        if (confirmClear) {
+            delete allSessions[menuTargetSessionId];
+            saveToLocalStorage();
+            
+            if (currentSessionId === menuTargetSessionId) {
+                const keys = Object.keys(allSessions);
+                if (keys.length > 0) {
+                    loadSession(keys[keys.length - 1]);
+                } else {
+                    startNewChat();
+                }
+            } else {
+                renderSidebarList();
+            }
+        }
+        hideContextMenu();
+    }
+
+    function handleKeyPress(event) {
+        if (event.key === 'Enter') {
+            askAI();
+        }
+    }
+
+    /* Working Clipboard Copy Core Handler Engine */
+    function copyResponseText(buttonElement) {
+        const messageContainer = buttonElement.closest('.bot-content-wrapper');
+        if (!messageContainer) return;
+        
+        const textPayload = messageContainer.querySelector('.bot-text-payload');
+        if (!textPayload) return;
+
+        const textToCopy = textPayload.innerText || textPayload.textContent;
+
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            const originalText = buttonElement.innerText;
+            buttonElement.innerText = "Copied!";
+            buttonElement.style.pointerEvents = "none";
+            
+            setTimeout(() => {
+                buttonElement.innerText = originalText;
+                buttonElement.style.pointerEvents = "auto";
+            }, 1800);
+        }).catch(err => {
+            console.error("Could not copy response text payload: ", err);
+        });
+    }
+
+    async function askAI() {
+        const inputField = document.getElementById("query");
+        const chatbox = document.getElementById("chatbox");
+        const question = inputField.value.trim();
+        
+        if (!question) return;
+
+        if (allSessions[currentSessionId].title === "New Chat") {
+            allSessions[currentSessionId].title = question.length > 22 ? question.substring(0, 22) + "..." : question;
+        }
+
+        chatbox.innerHTML += `<div class="message user">${question}</div>`;
+        inputField.value = "";
+        chatbox.scrollTop = chatbox.scrollHeight;
+
+        const loadingId = "load-" + Date.now();
+        chatbox.innerHTML += `<div class="message bot" id="${loadingId}">Thinking...</div>`;
+        chatbox.scrollTop = chatbox.scrollHeight;
+
+        allSessions[currentSessionId].logs = chatbox.innerHTML;
+        saveToLocalStorage();
+
+        const webAppUrl = "https://script.google.com/macros/s/AKfycbw81vKdCUxLnUM4MYbKDrCTaUqAcD3athMduBNshhaZEDdZgF2thbnTvX1a4YxPou50/exec";
+
+        try {
+            const response = await fetch(`${webAppUrl}?q=${encodeURIComponent(question)}`, {
+                method: 'GET',
+                redirect: 'follow'
+            });
+            
+            const data = await response.json();
+            const loader = document.getElementById(loadingId);
+            if(loader) loader.remove();
+            let sourceLabel = data.source.replace(/_/g, ' ');
+
+            chatbox.innerHTML += `
+                <div class="message bot">
+                    <div class="bot-content-wrapper">
+                        <div class="bot-text-payload">${data.answer}</div>
+                        <div class="bot-meta-footer">
+                            <span class="source-tag">Source: ${sourceLabel}</span>
+                            <button class="copy-response-btn" onclick="copyResponseText(this)">Copy</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+        } catch (err) {
+            console.error(err);
+            const loader = document.getElementById(loadingId);
+            if(loader) loader.remove();
+            chatbox.innerHTML += `
+                <div class="message bot error">
+                    <div class="bot-content-wrapper">
+                        <div class="bot-text-payload">Critical connection error.</div>
+                        <div class="bot-meta-footer">
+                            <span class="source-tag">Network Failure</span>
+                            <button class="copy-response-btn" onclick="copyResponseText(this)">Copy</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        chatbox.scrollTop = chatbox.scrollHeight;
+
+        allSessions[currentSessionId].logs = chatbox.innerHTML;
+        saveToLocalStorage();
+        renderSidebarList();
+    }
+</script>
+</body>
+</html>
