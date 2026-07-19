@@ -45,13 +45,17 @@ Whether you're asking questions, writing documents, generating ideas or solving 
 
 # 📸 Screenshots
 
-Web Version: 
-<img src="screenshots/web.png">
+<b>Web Version [For any device with web browser (eg. Chrome, Edge, Safari, etc.)]</b>
 
-| Phone | Tablet |
-|-------|---------|
-| <img src="screenshots/phone1.png" width="250"> | <img src="screenshots/tablet1.png" width="500"> |
-| <img src="screenshots/phone2.png" width="250"> | <img src="screenshots/tablet2.png" width="500"> |
+<p><img src="screenshots/web.png"><p>
+
+<b>Android Tab / Phone / Foldables Version [Android 10 & Up]</b>
+
+<p><img src="screenshots/tab.png"><p>
+
+<b>Windows Version [Windows 10 / 11 x64 / ARM64]</b>
+
+<p><img src="screenshots/windows.png"><p>
 
 ---
 
