@@ -2,7 +2,7 @@
 
 <img src="app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" width="180" alt="Ambient HybridAI">
 
-# Ambient HybridAI
+# OpenHelper AI (formerly Ambient HybridAI)
 
 ### Open source AI chatbot powered by Ambient HybridAI Intelligence 2.0
 
@@ -18,11 +18,11 @@ Modern, beautiful and free unlimited latest model usage AI assistant for Windows
 
 ## 📖 About
 
-Ambient HybridAI is a modern open source AI chatbot designed for Android and Windows.
+OpenHelper is a modern open source AI chatbot designed for Android and Windows.
 
-Powered by **Ambient HybridAI Intelligence 2.0**, it provides a fast, beautiful and intuitive AI experience while supporting multiple AI providers through a clean Material 3 Expressive interface.
+Powered by **Ambient HybridAI Intelligence 2.0**, it provides a fast, beautiful and intuitive AI experience through a clean Material 3 Expressive interface.
 
-Whether you're asking questions, writing documents, generating ideas or solving problems, Ambient HybridAI delivers an elegant AI experience designed specifically for Android and Windows.
+Whether you're asking questions, writing documents, generating ideas or solving problems, Ambient HybridAI delivers an elegant AI experience designed specifically for Android and Windows. 
 
 ---
 
@@ -96,7 +96,7 @@ Open the project using Android Studio / Electron (Windows version) and press **R
 
 ---
 
-# 🧠 Ambient HybridAI Intelligence 1.0
+# 🧠 Ambient HybridAI Intelligence 2.0
 
 Ambient HybridAI Intelligence 2.0 is the intelligence engine behind Ambient HybridAI.
 
@@ -124,7 +124,7 @@ Ambient HybridAI follows Google's latest Material Design guidelines.
 
 ---
 
-# ❤️ Why Ambient HybridAI?
+# ❤️ Why OpenHelper?
 
 Unlike many AI applications, Ambient HybridAI focuses on:
 
