@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OpenHelper — Free & Open Source AI Chatbot</title>
+<link rel="icon" type="image/ico" href="source/icon.ico">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#040508;--panel:rgba(255,255,255,.06);--border:rgba(255,255,255,.12);
+--txt:#fff;--muted:#b6bfca;--a:#3b82f6;--b:#7c3aed;--c:#06b6d4;
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);font-family:Inter,sans-serif;color:var(--txt);overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;background:
+radial-gradient(circle at 20% 20%,rgba(59,130,246,.22),transparent 35%),
+radial-gradient(circle at 80% 20%,rgba(124,58,237,.18),transparent 35%),
+radial-gradient(circle at 50% 100%,rgba(6,182,212,.18),transparent 40%);
+filter:blur(60px);z-index:-2}
+nav{position:fixed;top:0;left:0;right:0;z-index:99;padding:18px 5%;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(18px);background:rgba(4,5,8,.45);border-bottom:1px solid var(--border)}
+.logo{font-weight:900;letter-spacing:.5px}
+.hero{min-height:100vh;position:relative;display:grid;place-items:center;text-align:center}
+.hero-bg{position:absolute;inset:0;background:url('https://github.com/techambient/SonicSync/raw/main/meeting.png') center/cover no-repeat}
+.hero-bg:after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(4,5,8,.2),rgba(4,5,8,.92))}
+.hero-content{position:relative;z-index:2;padding:140px 24px}
+.badge{display:inline-block;padding:10px 16px;border:1px solid var(--border);background:#ffffff0f;border-radius:999px;backdrop-filter:blur(20px)}
+h1{font-size:clamp(3rem,8vw,7rem);margin:18px 0;font-weight:900}
+.sub{max-width:850px;margin:auto;color:var(--muted);font-size:1.2rem;line-height:1.8}
+.cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+.btn{padding:15px 24px;border-radius:18px;text-decoration:none;color:white;font-weight:700}
+.primary{background:linear-gradient(135deg,var(--a),var(--b))}
+.secondary{border:1px solid var(--border);background:#ffffff12}
+section{padding:100px 6%}
+.title{font-size:2.4rem;margin-bottom:30px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+.card{background:var(--panel);border:1px solid var(--border);backdrop-filter:blur(24px);border-radius:28px;padding:28px;transition:.3s}
+.card:hover{transform:translateY(-6px)}
+.metric{font-size:3rem;font-weight:900;background:linear-gradient(135deg,#fff,#8ec5ff);-webkit-background-clip:text;color:transparent}
+table{width:100%;border-collapse:collapse}
+td,th{padding:18px;border:1px solid var(--border)}
+footer{text-align:center;padding:70px;color:var(--muted)}
+
+/* Phone & Tablet Optimization Media Queries */
+@media (max-width: 768px) {
+  nav { padding: 14px 6%; font-size: 0.9rem; }
+  .hero-content { padding: 120px 16px 60px 16px; }
+  .badge { font-size: 0.85rem; padding: 8px 14px; line-height: 1.4; }
+  .sub { font-size: 1rem; line-height: 1.6; }
+  .cta { flex-direction: column; width: 100%; max-width: 320px; margin: 30px auto 0 auto; gap: 12px; }
+  .btn { width: 100%; text-align: center; padding: 14px 20px; }
+  section { padding: 60px 6%; }
+  .title { font-size: 1.8rem; margin-bottom: 20px; text-align: center; }
+  .grid { grid-template-columns: 1fr; gap: 16px; }
+  .card { padding: 20px; border-radius: 20px; }
+  .card:hover { transform: none; } /* Prevents awkward sticky hover states on touch screens */
+  .metric { font-size: 2.5rem; }
+  td, th { padding: 12px 8px; font-size: 0.85rem; }
+  footer { padding: 40px 20px; font-size: 0.85rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="logo">OpenHelper (formerly HybridAI)</div>
+<div>Unlimited Usage • Free • Open Source</div>
+</nav>
+
+<div id="site">
+<header class="hero">
+<div class="hero-bg"></div>
+<div class="hero-content">
+<div class="badge">The Only Free & Open Source AI Chatbot</div>
+<h1>Solve Anything,<br>Without Limits.</h1>
+<p class="sub">Peer-to-peer screen, audio, camera and media sharing with virtually zero delay. No cloud. No ads. No tracking. Unlimited receivers.</p>
+<div class="cta">
+<a class="btn primary" href="https://github.com/techambient/HybridAI">View on GitHub</a>
+<a class="btn secondary" href="https://techambient.github.io/HybridAI/chat">Chat Now</a>
+</div>
+</div>
+</header>
+
+<section>
+<h2 class="title">Major Advantages</h2>
+<div class="grid">
+<div class="card"><div class="metric">✔</div><p>Reliable & fast AI model.</p></div>
+<div class="card"><div class="metric">∞</div><p>Unlimited free usage</p></div>
+<div class="card"><div class="metric">0%</div><p>Ads, telemetry and tracking.</p></div>
+<div class="card"><div class="metric">100%</div><p>Free & open source.</p></div>
+</div>
+</section>
+
+<section id="features">
+<h2 class="title">Major Features</h2>
+<div class="grid">
+<div class="card">Local Chat History</div>
+<div class="card">Optimised for any device</div>
+<div class="card">Dynamic Theming</div>
+<div class="card">Material You UI</div>
+</div>
+</section>
+
+<section>
+<h2 class="title">OpenHelper vs Others AI Chatbot</h2>
+<div class="card" style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+<table>
+<tr><th>Aspects</th><th>OpenHelper</th><th>Others AI Chatbot</th></tr>
+<tr><td>Chat Limitations</td><td>Unlimited</td><td>Limited</td></tr>
+<tr><td>Open Source</td><td>Fully Yes</td><td>No</td></tr>
+</table>
+</div>
+</section>
+
+<section>
+<div class="card" style="text-align:center">
+<h2>Built for Education, Developers, Streaming & etc.</h2>
+<p style="color:var(--muted)">Free AI Chatbot across any devices with a modern, unlimited and reliable experience.</p>
+</div>
+</section>
+
+<footer>
+OpenHelper (formerly HybridAI) • MIT Licensed • TechAmbient
+</footer>
+</div>
+
+</body>
+</html>
