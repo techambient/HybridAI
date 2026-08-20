@@ -152,9 +152,11 @@ You can help by:
 
 # ⭐ Support
 
-If you enjoy Ambient HybridAI, please consider giving this repository a ⭐.
+If you enjoy Ambient HybridAI, please consider giving this repository a ⭐ and give some donations to help keep it alive!
 
-It helps the project grow and motivates future development.
+* **Solana (SOL / USDC):** `EME9M9cSy9FvfHvcx2gMPkp1H5Dj4YaKufPRsAyon8Tf`
+* **Bitcoin (Taproot):** `bc1pguvpjudf9gr2lyjcf4s9ttvzushgu0hqhr2p7fwqzsz4977kajcqemvned`
+* **Bitcoin (Native Segwit):** `bc1qwfjwytw8lehg20es373cx2ulr3el99rt9uurz5`
 
 ---
 
