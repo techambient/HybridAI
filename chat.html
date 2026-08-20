@@ -171,14 +171,6 @@
             box-shadow: 0 8px 20px var(--md-primary-container);
         }
 
-        .new-chat-btn:hover {
-            transform: translateY(-2px);
-            background: var(--md-primary);
-            color: white;
-            border-color: transparent;
-            box-shadow: 0 8px 20px var(--md-primary-container);
-        }
-
         .history-title {
             font-size: 0.72rem;
             text-transform: uppercase;
@@ -318,6 +310,75 @@
             color: var(--md-on-surface-variant);
             margin-top: 4px;
             font-weight: 500;
+        }
+
+        /* ── DONATION BANNER STYLES ── */
+        .donation-banner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--md-surface-variant);
+            border-bottom: 1px solid var(--inner-border);
+            padding: 10px 24px;
+            font-size: 0.85rem;
+            color: var(--md-on-surface);
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .donation-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .donation-btn {
+            background: var(--md-primary);
+            color: white;
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 99px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: auto;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 8px var(--md-primary-container);
+        }
+
+        .donation-btn:hover {
+            filter: brightness(1.1);
+            transform: translateY(-1px);
+        }
+
+        .donation-close-btn {
+            background: transparent;
+            border: none;
+            color: var(--md-on-surface-variant);
+            font-size: 1.2rem;
+            line-height: 1;
+            cursor: pointer;
+            padding: 4px;
+            height: auto;
+            width: auto;
+            box-shadow: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .donation-close-btn:hover {
+            background: var(--inner-border);
+            color: var(--md-on-surface);
+            transform: none;
+            filter: none;
+            box-shadow: none;
         }
 
         /* Responsive Sidebar Dynamic Controls */
@@ -620,6 +681,10 @@
                 font-size: 1.2rem;
             }
 
+            .donation-banner {
+                padding: 10px 16px;
+            }
+
             #chatbox {
                 padding: 20px;
                 gap: 20px;
@@ -676,6 +741,14 @@
                 <button class="menu-toggle-btn" onclick="toggleSidebar(true)">☰</button>
             </div>
             
+            <div id="donationBanner" class="donation-banner">
+                <div class="donation-content">
+                    <span>Enjoying OpenHelper AI? Support future updates with a small donation.</span>
+                    <a href="donate.html" class="donation-btn">Donate</a>
+                </div>
+                <button class="donation-close-btn" onclick="closeDonationBanner()" aria-label="Close message">×</button>
+            </div>
+
             <div id="chatbox"></div>
             
             <div class="input-area">
@@ -724,6 +797,13 @@
         initializeWorkspace();
         setupGlobalClickHandlers();
     };
+
+    function closeDonationBanner() {
+        const banner = document.getElementById("donationBanner");
+        if (banner) {
+            banner.style.display = "none";
+        }
+    }
 
     function toggleSidebar(shouldShow) {
         const sidebar = document.getElementById("sidebar");
