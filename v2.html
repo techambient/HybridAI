@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>OpenHelper v2 Preview</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* Strict Google Material 3 Web Dynamic Color Scheme */
+        :root {
+            /* M3 Dark Baseline Tokens */
+            --md-sys-color-background: #101318;
+            --md-sys-color-on-background: #e0e2e8;
+            --md-sys-color-surface: #101318;
+            --md-sys-color-surface-dim: #101318;
+            --md-sys-color-surface-bright: #36393e;
+            --md-sys-color-surface-container-lowest: #0b0e13;
+            --md-sys-color-surface-container-low: #191c20;
+            --md-sys-color-surface-container: #1d2024;
+            --md-sys-color-surface-container-high: #272a2f;
+            --md-sys-color-surface-container-highest: #32353a;
+            --md-sys-color-on-surface: #e0e2e8;
+            --md-sys-color-on-surface-variant: #c2c7cf;
+
+            --md-sys-color-primary: #a8c7fa;
+            --md-sys-color-on-primary: #043168;
+            --md-sys-color-primary-container: #004a98;
+            --md-sys-color-on-primary-container: #d6e3ff;
+
+            --md-sys-color-secondary: #bfc6dc;
+            --md-sys-color-on-secondary: #293042;
+            --md-sys-color-secondary-container: #3f4759;
+            --md-sys-color-on-secondary-container: #dbe2f9;
+
+            --md-sys-color-tertiary: #6fd6c2;
+            --md-sys-color-on-tertiary: #00382f;
+            --md-sys-color-tertiary-container: #005144;
+            --md-sys-color-on-tertiary-container: #8cf2dd;
+
+            --md-sys-color-outline: #8c9199;
+            --md-sys-color-outline-variant: #42474e;
+
+            /* M3 Elevation Shadows */
+            --md-elevation-1: 0px 1px 3px 1px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.30);
+            --md-elevation-2: 0px 2px 6px 2px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.30);
+
+            /* M3 Shape Tokens */
+            --md-shape-full: 9999px;
+            --md-shape-xl: 28px;
+            --md-shape-lg: 16px;
+            --md-shape-md: 12px;
+            --md-shape-sm: 8px;
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root {
+                --md-sys-color-background: #f8f9ff;
+                --md-sys-color-on-background: #191c20;
+                --md-sys-color-surface: #f8f9ff;
+                --md-sys-color-surface-dim: #d9dadf;
+                --md-sys-color-surface-bright: #f8f9ff;
+                --md-sys-color-surface-container-lowest: #ffffff;
+                --md-sys-color-surface-container-low: #f2f3f9;
+                --md-sys-color-surface-container: #eceedf;
+                --md-sys-color-surface-container-high: #e6e8ee;
+                --md-sys-color-surface-container-highest: #e0e2e8;
+                --md-sys-color-on-surface: #191c20;
+                --md-sys-color-on-surface-variant: #42474e;
+
+                --md-sys-color-primary: #005ac1;
+                --md-sys-color-on-primary: #ffffff;
+                --md-sys-color-primary-container: #d6e3ff;
+                --md-sys-color-on-primary-container: #001b3e;
+
+                --md-sys-color-secondary: #565f71;
+                --md-sys-color-on-secondary: #ffffff;
+                --md-sys-color-secondary-container: #dbe2f9;
+                --md-sys-color-on-secondary-container: #131c2c;
+
+                --md-sys-color-tertiary: #006b5b;
+                --md-sys-color-on-tertiary: #ffffff;
+                --md-sys-color-tertiary-container: #8cf2dd;
+                --md-sys-color-on-tertiary-container: #00201a;
+
+                --md-sys-color-outline: #72777f;
+                --md-sys-color-outline-variant: #c2c7cf;
+
+                --md-elevation-1: 0px 1px 2px 0px rgba(0, 0, 0, 0.30), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+                --md-elevation-2: 0px 1px 2px 0px rgba(0, 0, 0, 0.30), 0px 2px 6px 2px rgba(0, 0, 0, 0.15);
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--md-sys-color-background);
+            color: var(--md-sys-color-on-background);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Material 3 Top App Bar */
+        .m3-top-app-bar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 64px;
+            background: var(--md-sys-color-surface-container);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            z-index: 1000;
+            border-bottom: 1px solid var(--md-sys-color-outline-variant);
+            box-shadow: var(--md-elevation-1);
+        }
+
+        .m3-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--md-sys-color-on-surface);
+        }
+
+        .m3-brand .material-symbols-outlined {
+            color: var(--md-sys-color-primary);
+            font-size: 28px;
+        }
+
+        section {
+            width: 100%;
+            max-width: 900px;
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 24px 60px;
+            text-align: center;
+        }
+
+        /* Scroll Animations (Only Opacity & Vertical Translation) */
+        .reveal-node {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s cubic-bezier(0.2, 0, 0, 1), transform 0.6s cubic-bezier(0.2, 0, 0, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal-node.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Material 3 Filter Chip Style Badge */
+        .m3-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: var(--md-shape-sm);
+            background: var(--md-sys-color-surface-container-high);
+            border: 1px solid var(--md-sys-color-outline);
+            color: var(--md-sys-color-on-surface-variant);
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+
+        /* Hero Typography */
+        h1.hero-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+            color: var(--md-sys-color-on-surface);
+        }
+
+        .hero-title-highlight {
+            color: var(--md-sys-color-primary);
+        }
+
+        p.hero-sub {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--md-sys-color-on-surface-variant);
+            max-width: 650px;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        /* Static Material 3 Cards Layout (No tilt, hover movement, or dynamic cursor effects) */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            width: 100%;
+            margin-top: 48px;
+        }
+
+        .m3-card {
+            background: var(--md-sys-color-surface-container-low);
+            border-radius: var(--md-shape-xl);
+            padding: 32px 24px;
+            text-align: left;
+            border: 1px solid var(--md-sys-color-outline-variant);
+            box-shadow: var(--md-elevation-1);
+        }
+
+        .card-icon-wrapper {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--md-shape-md);
+            background: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .card-icon-wrapper .material-symbols-outlined {
+            font-size: 28px;
+        }
+
+        .m3-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--md-sys-color-on-surface);
+            margin-bottom: 8px;
+        }
+
+        .m3-card p {
+            color: var(--md-sys-color-on-surface-variant);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Static Showcase Displays inside Cards */
+        .rate-showcase {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 20px;
+            padding: 12px 16px;
+            background: var(--md-sys-color-surface-container-highest);
+            border-radius: var(--md-shape-md);
+        }
+
+        .rate-num { font-weight: 700; font-size: 1.25rem; }
+        .rate-num.old { color: #f2b8b5; text-decoration: line-through; }
+        .rate-num.new { color: var(--md-sys-color-tertiary); font-size: 1.5rem; }
+
+        .code-pill {
+            margin-top: 20px;
+            padding: 10px 14px;
+            background: var(--md-sys-color-surface-container-highest);
+            border-radius: var(--md-shape-md);
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--md-sys-color-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Material 3 Standard Buttons */
+        .m3-btn-filled {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            height: 56px;
+            padding: 0 32px;
+            border-radius: var(--md-shape-full);
+            background: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--md-elevation-1);
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .m3-btn-filled:active {
+            box-shadow: none;
+            background: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+        }
+
+        /* Material 3 Outlined Form Containers */
+        .m3-card-form {
+            width: 100%;
+            max-width: 480px;
+            background: var(--md-sys-color-surface-container-low);
+            border-radius: var(--md-shape-xl);
+            padding: 36px 28px;
+            border: 1px solid var(--md-sys-color-outline-variant);
+            box-shadow: var(--md-elevation-2);
+        }
+
+        .m3-text-field {
+            position: relative;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .m3-text-field input {
+            width: 100%;
+            height: 56px;
+            padding: 16px 16px 16px 48px;
+            border-radius: var(--md-shape-sm);
+            border: 1px solid var(--md-sys-color-outline);
+            background: transparent;
+            color: var(--md-sys-color-on-surface);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .m3-text-field label {
+            position: absolute;
+            left: 48px;
+            top: 18px;
+            color: var(--md-sys-color-on-surface-variant);
+            font-size: 1rem;
+            pointer-events: none;
+            transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+            background: var(--md-sys-color-surface-container-low);
+            padding: 0 4px;
+        }
+
+        .m3-text-field input:focus ~ label,
+        .m3-text-field input:not(:placeholder-shown) ~ label {
+            top: -10px;
+            left: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--md-sys-color-primary);
+        }
+
+        .m3-text-field .material-symbols-outlined {
+            position: absolute;
+            left: 14px;
+            top: 16px;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+
+        .m3-text-field input:focus {
+            border-color: var(--md-sys-color-primary);
+            border-width: 2px;
+        }
+
+        .m3-text-field input:focus ~ .material-symbols-outlined {
+            color: var(--md-sys-color-primary);
+        }
+
+        /* M3 Banner Message */
+        .m3-banner {
+            display: none;
+            margin-top: 20px;
+            padding: 16px 20px;
+            border-radius: var(--md-shape-md);
+            background: var(--md-sys-color-tertiary-container);
+            color: var(--md-sys-color-on-tertiary-container);
+            text-align: left;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        /* Material 3 Footer */
+        .m3-footer {
+            width: 100%;
+            background: var(--md-sys-color-surface-container);
+            border-top: 1px solid var(--md-sys-color-outline-variant);
+            padding: 40px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .m3-footer-links {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .m3-footer-links a {
+            color: var(--md-sys-color-primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: opacity 0.2s ease;
+        }
+
+        .m3-footer-links a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        .m3-footer-copyright {
+            color: var(--md-sys-color-on-surface-variant);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+
+        @media (max-width: 600px) {
+            section { padding: 80px 16px 40px; }
+            .m3-card-form { padding: 28px 20px; }
+            .m3-top-app-bar { padding: 0 16px; }
+            .m3-footer { padding: 32px 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="m3-top-app-bar">
+        <div class="m3-brand">
+            <span class="material-symbols-outlined">auto_awesome</span>
+            <span>OpenHelper</span>
+        </div>
+        <div class="m3-chip" style="margin-bottom:0; padding: 4px 12px; font-size: 0.75rem;">
+            <span>v2 Preview</span>
+        </div>
+    </header>
+
+    <section class="reveal-node">
+        <div class="m3-chip">
+            <span class="material-symbols-outlined" style="font-size: 18px; color: var(--md-sys-color-primary);">wand_stars</span>
+            <span>Steps into new AI era</span>
+        </div>
+        <h1 class="hero-title"><span class="hero-title-highlight">OpenHelper v2</span> Preview</h1>
+        <p class="hero-sub">The next generation of free & open source AI Chatbot specifically built for speed, advanced math logic, and full & complete code generation.</p>
+    </section>
+
+    <section class="reveal-node">
+        <h2 style="font-size: 2rem; font-weight: 700; color: var(--md-sys-color-on-surface); margin-bottom: 8px;">Major Improvements</h2>
+        <p style="color: var(--md-sys-color-on-surface-variant); margin-bottom: 24px;">Built for high quality respond across all prompts.</p>
+        
+        <div class="cards-grid">
+            <div class="m3-card">
+                <div class="card-icon-wrapper">
+                    <span class="material-symbols-outlined">trending_down</span>
+                </div>
+                <h3>Reliability Boost</h3>
+                <p>Dropped fails to respond rate largely from > 60% to < 2%</p>
+                <div class="rate-showcase">
+                    <span class="rate-num old">60%</span>
+                    <span class="material-symbols-outlined" style="color: var(--md-sys-color-tertiary);">arrow_forward</span>
+                    <span class="rate-num new">&lt; 2%</span>
+                </div>
+            </div>
+
+            <div class="m3-card">
+                <div class="card-icon-wrapper">
+                    <span class="material-symbols-outlined">terminal</span>
+                </div>
+                <h3>Full Code Generation</h3>
+                <p>Supports code generation based on Ambient HybridAI Code Intelligence 1.0.</p>
+                <div class="code-pill">
+                    <span class="material-symbols-outlined" style="font-size: 18px;">memory</span>
+                    <span>HybridAI Code 1.0</span>
+                </div>
+            </div>
+
+            <div class="m3-card">
+                <div class="card-icon-wrapper">
+                    <span class="material-symbols-outlined">calculate</span>
+                </div>
+                <h3>Advanced Math</h3>
+                <p>Supports advanced math questions and multi-variable analytical calculations.</p>
+                <div class="rate-showcase" style="justify-content: center; color: var(--md-sys-color-tertiary);">
+                    <span class="material-symbols-outlined">functions</span>
+                    <span style="font-weight: 700; font-size: 0.95rem;">High-Precision Solver</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="reveal-node">
+        <div class="card-icon-wrapper" style="width: 64px; height: 64px; border-radius: 50%; margin: 0 auto 20px;">
+            <span class="material-symbols-outlined" style="font-size: 32px;">public</span>
+        </div>
+        <h2 style="font-size: 2.25rem; font-weight: 700; color: var(--md-sys-color-on-surface); margin-bottom: 12px;">Large Global Availability</h2>
+        <p class="hero-sub" style="margin-bottom: 36px;">Expected to launch before <strong>November 2026</strong>, available across <strong>64+ countries</strong>.</p>
+        
+        <a href="https://google.com" target="_blank" class="m3-btn-filled">
+            <span class="material-symbols-outlined">explore</span>
+            <span>See available country</span>
+        </a>
+    </section>
+
+    <section class="reveal-node">
+        <div class="m3-card-form">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px; text-align: left;">
+                <span class="material-symbols-outlined" style="font-size: 32px; color: var(--md-sys-color-primary);">mail</span>
+                <div>
+                    <h2 style="font-size: 1.5rem; font-weight: 700; color: var(--md-sys-color-on-surface);">Get notified before launch</h2>
+                </div>
+            </div>
+            <p style="color: var(--md-sys-color-on-surface-variant); font-size: 0.9rem; margin-bottom: 28px; text-align: left;">Sign up to get notified early in your country.</p>
+
+            <form id="notifyForm">
+                <div class="m3-text-field">
+                    <input type="email" id="email" placeholder=" " required autocomplete="email">
+                    <label for="email">Email Address</label>
+                    <span class="material-symbols-outlined">alternate_email</span>
+                </div>
+                
+                <div class="m3-text-field">
+                    <input type="text" id="country" placeholder=" " required autocomplete="country-name">
+                    <label for="country">Your Country</label>
+                    <span class="material-symbols-outlined">flag</span>
+                </div>
+
+                <button type="submit" class="m3-btn-filled" style="max-width: 100%;">
+                    <span class="material-symbols-outlined">send</span>
+                    <span>Submit</span>
+                </button>
+            </form>
+
+            <div id="responseMessage" class="m3-banner">
+                <div style="display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 4px;">
+                    <span class="material-symbols-outlined">check_circle</span>
+                    <span>Registration Complete</span>
+                </div>
+                Thanks, you will receives an email before launch from techambient (tempu3544@gmail.com)!!
+            </div>
+        </div>
+    </section>
+
+    <footer class="m3-footer">
+        <div class="m3-footer-links">
+            <a href="https://google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+            <a href="https://google.com/terms" target="_blank" rel="noopener noreferrer">Terms of Service</a>
+            <a href="https://google.com/help" target="_blank" rel="noopener noreferrer">Help Center</a>
+        </div>
+        <div class="m3-footer-copyright">
+            &copy; Ambient Technologies (techambient) 2026. All rights reserved. <br>
+            This website is generated by Ambient HybridAI Code Intelligence 1.0.
+        </div>
+    </footer>
+
+    <script>
+        // Smooth Intersection Observer Reveal Animations (Standard opacity & slide, no tilt/canvas)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal-node').forEach(el => observer.observe(el));
+
+        // Form Handling to Google Apps Script Web App
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyrhGVToZ9qlcIHdqOBIp8XO5zbDSd4AoE_kKrju7osYaUo3OUq4crmWf0JPyEy2inL7w/exec';
+        const form = document.getElementById('notifyForm');
+        const messageBox = document.getElementById('responseMessage');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            
+            const submitBtn = form.querySelector('button');
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = '0.7';
+            submitBtn.querySelector('span:nth-child(2)').innerText = 'Submitting...';
+
+            const payload = {
+                email: document.getElementById('email').value,
+                country: document.getElementById('country').value
+            };
+
+            fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+            .then(() => {
+                form.style.display = 'none';
+                messageBox.style.display = 'block';
+            })
+            .catch(error => {
+                alert('Critical connection error, check your connection.');
+                submitBtn.disabled = false;
+                submitBtn.style.opacity = '1';
+                submitBtn.querySelector('span:nth-child(2)').innerText = 'Submit';
+            });
+        });
+    </script>
+</body>
+</html>
