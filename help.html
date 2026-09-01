@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenHelper AI | Support</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050505;
+            --sidebar-bg: rgba(255, 255, 255, 0.02);
+            --border: rgba(255, 255, 255, 0.08);
+            --accent: #ffffff;
+            --text-p: rgba(255, 255, 255, 0.6);
+            --glow: rgba(120, 119, 198, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg);
+            color: #fff;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- Sidebar (Left Panel) --- */
+        aside {
+            width: 320px;
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border);
+            backdrop-filter: blur(20px);
+            display: flex;
+            flex-direction: column;
+            padding: 40px 20px;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            padding-left: 15px;
+            letter-spacing: -1px;
+        }
+
+        .nav-group {
+            margin-bottom: 30px;
+        }
+
+        .nav-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-p);
+            margin-bottom: 15px;
+            padding-left: 15px;
+        }
+
+        .nav-item {
+            padding: 12px 15px;
+            border-radius: 12px;
+            color: var(--text-p);
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .nav-item:hover {
+            color: #fff;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .nav-item.active {
+            color: #fff;
+            background: rgba(255,255,255,0.1);
+            box-shadow: inset 0 0 0 1px var(--border);
+        }
+
+        /* --- Content (Right Panel) --- */
+        main {
+            flex: 1;
+            overflow-y: auto;
+            padding: 80px 10%;
+            position: relative;
+        }
+
+        /* Ambient background glow for content */
+        main::before {
+            content: '';
+            position: fixed;
+            top: 0; right: 0;
+            width: 400px; height: 400px;
+            background: var(--glow);
+            filter: blur(100px);
+            z-index: -1;
+        }
+
+        .content-area {
+            max-width: 800px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 { font-size: 2.5rem; margin-bottom: 24px; letter-spacing: -1px; }
+        p { font-size: 1.1rem; color: var(--text-p); margin-bottom: 20px; line-height: 1.8; }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 40px;
+            color: var(--text-p);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover { color: #fff; }
+
+        /* Custom Scrollbar */
+        main::-webkit-scrollbar { width: 6px; }
+        main::-webkit-scrollbar-track { background: transparent; }
+        main::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+
+        /* --- AI Assistant Floating --- */
+        .ai-trigger {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #fff;
+            color: #000;
+            padding: 12px 24px;
+            border-radius: 100px;
+            font-weight: 800;
+            text-decoration: none;
+            font-size: 0.8rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <aside>
+        <div class="logo">OpenHelper AI</div>
+        
+        <div class="nav-group">
+            <div class="nav-label">Basics</div>
+            <a onclick="showContent('quickstart')" class="nav-item active" id="btn-quickstart">Quick Start Guide</a>
+            <a onclick="showContent('problem')" class="nav-item" id="btn-problem">Troubleshooting</a>
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-label">More</div>
+            <a onclick="showContent('security')" class="nav-item" id="btn-security">Terms</a>
+            <a onclick="showContent('payments')" class="nav-item" id="btn-payments">License</a>
+        </div>
+    </aside>
+
+    <main>
+        <a href="chat.html" class="back-link">← Back to OpenHelper AI</a>
+        
+        <div id="content" class="content-area">
+            <h1>Quick Start Guide</h1>
+            <p>Welcome to the 2026 Ambient OpenHelper AI Chatbot. To begin, just click the prompt box below at the chat interface and type in your questions.</p>
+            <p>After that, press the arrow up button next to prompt box or press enter to ask. There you go! Just watch the respond!</p>
+        </div>
+    </main>
+
+    <a href="chat.html" target="_blank" class="ai-trigger">AI ASSISTANT</a>
+
+    <script>
+        const topics = {
+            quickstart: {
+                title: "Quick Start Guide",
+                body: "<p>Welcome to the 2026 Ambient OpenHelper AI Chatbot. To begin, just click the prompt box below at the chat interface and type in your questions.</p><p>After that, press the arrow up button next to prompt box or press enter to ask. There you go! Just watch the respond!</p>"
+            },
+            problem: {
+                title: "Troubleshooting",
+                body: "<p>Most issues for the thinking stuck is most likely <b>high demand on the server</b></p><p>Just try again by resending the prompt, if the issue still persist, try to reconnect to your Wifi / mobile data.</p>"
+            },
+            security: {
+                title: "Terms",
+                body: "<p>To see the terms, visit https://techambient.github.io/HybridAI/tc</p>"
+            },
+payments: {
+    title: "MIT License",
+    body: `<p>Copyright (c) 2026 techambient
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+</p>`
+}
+        };
+
+        function showContent(id) {
+            // Update Text content
+            const article = topics[id];
+            document.getElementById('content').innerHTML = `
+                <h1>${article.title}</h1>
+                ${article.body}
+            `;
+
+            // Update Active State in Sidebar
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            document.getElementById('btn-' + id).classList.add('active');
+
+            // Scroll to top of main
+            document.querySelector('main').scrollTop = 0;
+        }
+    </script>
+</body>
+</html>
