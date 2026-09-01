@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>OpenHelper AI v2 (Preview) Supported Countries & Operating Hours</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --primary: #2563eb;
+      --primary-bg: #eff6ff;
+      --header-bg: #f1f5f9;
+      --row-alt: #f8fafc;
+      --badge-bg: #e0e7ff;
+      --badge-text: #3730a3;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f172a;
+        --card-bg: #1e293b;
+        --text-main: #f8fafc;
+        --text-muted: #94a3b8;
+        --border: #334155;
+        --primary: #3b82f6;
+        --primary-bg: #1e3a8a;
+        --header-bg: #0f172a;
+        --row-alt: #162032;
+        --badge-bg: #312e81;
+        --badge-text: #c7d2fe;
+        --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.5;
+      padding: 2.5rem 1rem;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    header {
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+
+    .badge-pill {
+      display: inline-block;
+      background-color: var(--primary-bg);
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      margin-bottom: 0.75rem;
+    }
+
+    h1 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    th {
+      background-color: var(--header-bg);
+      color: var(--text-main);
+      font-weight: 600;
+      padding: 0.85rem 1rem;
+      border-bottom: 2px solid var(--border);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: var(--row-alt);
+    }
+
+    tbody tr:hover {
+      background-color: var(--primary-bg);
+    }
+
+    .tz-code {
+      display: inline-block;
+      background-color: var(--badge-bg);
+      color: var(--badge-text);
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    footer p {
+      margin-bottom: 0.35rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="badge-pill">OpenHelper AI v2 (Preview)</span>
+      <h1>Supported Countries &amp; Operating Hours</h1>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2 class="card-title">All Supported Asian Countries + Its Operating Hours </h2>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Time Zone</th>
+                <th>Operating Hours</th>
+                <th>Supported Asian Countries</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="tz-code">UTC+9</span></td>
+                <td>10:00 PM – 4:00 AM</td>
+                <td>Japan, South Korea, Timor-Leste </td>
+              </tr>
+              <tr>
+                <td><span class="tz-code">UTC+8</span></td>
+                <td>9:00 PM – 3:00 AM</td>
+                <td>Brunei, China, Malaysia, Mongolia, Philippines, Singapore, Taiwan </td>
+              </tr>
+              <tr>
+                <td><span class="tz-code">UTC+7</span></td>
+                <td>8:00 PM – 2:00 AM</td>
+                <td>Cambodia, Indonesia (WIB), Laos, Thailand, Vietnam </td>
+              </tr>
+              <tr>
+                <td><span class="tz-code">UTC+6:30</span></td>
+                <td>7:30 PM – 1:30 AM</td>
+                <td>Myanmar </td>
+              </tr>
+              <tr>
+                <td><span class="tz-code">UTC+6</span></td>
+                <td>7:00 PM – 1:00 AM</td>
+                <td>Bangladesh, Bhutan, Kazakhstan (East), Kyrgyzstan </td>
+              </tr>
+              <tr>
+                <td><span class="tz-code">UTC+5:45</span></td>
+                <td>6:45 PM – 12:45 AM</td>
+                <td>Nepal </td>
+              </tr>
+              <tr>
+                <td><span class="tz-code">UTC+5:30</span></td>
+                <td>6:30 PM – 12:30 AM</td>
+                <td>India, Sri Lanka </td>
+              </tr>
+              <tr>
+                <td><span class="tz-code">UTC+5</span></td>
+                <td>6:00 PM – 12:00 AM</td>
+                <td>Kazakhstan (West), Maldives, Pakistan, Tajikistan, Turkmenistan, Uzbekistan </td>
+              </tr>
+              <tr>
+                <td><span class="tz-code">UTC+4:30</span></td>
+                <td>5:30 PM – 11:30 PM</td>
+                <td>Afghanistan </td>
+              </tr>
+              <tr>
+                <td><span class="tz-code">UTC+4</span></td>
+                <td>5:00 PM – 11:00 PM</td>
+                <td>Armenia, Azerbaijan, Georgia, Oman, United Arab Emirates </td>
+              </tr>
+              <tr>
+                <td><span class="tz-code">UTC+3</span></td>
+                <td>4:00 PM – 10:00 PM</td>
+                <td>Bahrain, Iraq, Jordan, Kuwait, Lebanon, Qatar, Saudi Arabia, Turkey, Yemen </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="card-title">Supported Others non-Asia country </h2>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Country</th>
+                <th>Time Zone</th>
+                <th>Operating Hours</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>United States</td>
+                <td><span class="tz-code">EDT (UTC-4) / PDT (UTC-7)</span></td>
+                <td>9:00 AM – 3:00 PM / 6:00 AM – 12:00 PM </td>
+              </tr>
+              <tr>
+                <td>Canada</td>
+                <td><span class="tz-code">EDT (UTC-4) / PDT (UTC-7)</span></td>
+                <td>9:00 AM – 3:00 PM / 6:00 AM – 12:00 PM </td>
+              </tr>
+              <tr>
+                <td>Mexico</td>
+                <td><span class="tz-code">CST (UTC-6)</span></td>
+                <td>7:00 AM – 1:00 PM </td>
+              </tr>
+              <tr>
+                <td>Colombia</td>
+                <td><span class="tz-code">COT (UTC-5)</span></td>
+                <td>8:00 AM – 2:00 PM </td>
+              </tr>
+              <tr>
+                <td>Peru</td>
+                <td><span class="tz-code">PET (UTC-5)</span></td>
+                <td>8:00 AM – 2:00 PM </td>
+              </tr>
+              <tr>
+                <td>Brazil</td>
+                <td><span class="tz-code">BRT (UTC-3)</span></td>
+                <td>10:00 AM – 4:00 PM </td>
+              </tr>
+              <tr>
+                <td>Argentina</td>
+                <td><span class="tz-code">ART (UTC-3)</span></td>
+                <td>10:00 AM – 4:00 PM </td>
+              </tr>
+              <tr>
+                <td>United Kingdom</td>
+                <td><span class="tz-code">BST (UTC+1)</span></td>
+                <td>2:00 PM – 8:00 PM </td>
+              </tr>
+              <tr>
+                <td>Germany</td>
+                <td><span class="tz-code">CEST (UTC+2)</span></td>
+                <td>3:00 PM – 9:00 PM </td>
+              </tr>
+              <tr>
+                <td>France</td>
+                <td><span class="tz-code">CEST (UTC+2)</span></td>
+                <td>3:00 PM – 9:00 PM </td>
+              </tr>
+              <tr>
+                <td>Italy</td>
+                <td><span class="tz-code">CEST (UTC+2)</span></td>
+                <td>3:00 PM – 9:00 PM </td>
+              </tr>
+              <tr>
+                <td>Spain</td>
+                <td><span class="tz-code">CEST (UTC+2)</span></td>
+                <td>3:00 PM – 9:00 PM </td>
+              </tr>
+              <tr>
+                <td>Netherlands</td>
+                <td><span class="tz-code">CEST (UTC+2)</span></td>
+                <td>3:00 PM – 9:00 PM </td>
+              </tr>
+              <tr>
+                <td>Sweden</td>
+                <td><span class="tz-code">CEST (UTC+2)</span></td>
+                <td>3:00 PM – 9:00 PM </td>
+              </tr>
+              <tr>
+                <td>Poland</td>
+                <td><span class="tz-code">CEST (UTC+2)</span></td>
+                <td>3:00 PM – 9:00 PM </td>
+              </tr>
+              <tr>
+                <td>Nigeria</td>
+                <td><span class="tz-code">WAT (UTC+1)</span></td>
+                <td>2:00 PM – 8:00 PM </td>
+              </tr>
+              <tr>
+                <td>South Africa</td>
+                <td><span class="tz-code">SAST (UTC+2)</span></td>
+                <td>3:00 PM – 9:00 PM </td>
+              </tr>
+              <tr>
+                <td>Kenya</td>
+                <td><span class="tz-code">EAT (UTC+3)</span></td>
+                <td>4:00 PM – 10:00 PM </td>
+              </tr>
+              <tr>
+                <td>Australia</td>
+                <td><span class="tz-code">AEST (UTC+10)</span></td>
+                <td>11:00 PM – 5:00 AM </td>
+              </tr>
+              <tr>
+                <td>New Zealand</td>
+                <td><span class="tz-code">NZST (UTC+12)</span></td>
+                <td>1:00 AM – 7:00 AM </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Copyright 2026 Ambient Technologies (techambient). All rights reserved. </p>
+      <p>This website is generated by Ambient HybridAI Code Intelligence 1.0 (Preview). </p>
+    </footer>
+  </div>
+</body>
+</html>
