@@ -8,7 +8,7 @@
 
 Modern, beautiful and free unlimited latest model usage AI assistant for Windows devices, Android phones, tablets and foldables.
 
-[![License](https://img.shields.io/github/license/techambient/Ambient-HybridAI?style=for-the-badge)](LICENSE)
+[![License](https://img.shields.io/github/license/techambient/HybridAI?style=for-the-badge)](LICENSE)
 [![Platform](https://img.shields.io/badge/Android-10%2B-34A853?style=for-the-badge)]()
 [![Material 3](https://img.shields.io/badge/Material%203-Expressive-4285F4?style=for-the-badge)]()
 
