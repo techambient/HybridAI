@@ -1221,11 +1221,10 @@
             }).catch(err => console.error("Copy failed:", err));
         }
 
-        // ─── LM STUDIO BACKEND (via Cloudflare Tunnel + CORS proxy) ──────
-        // Free CORS proxy – replace with your own if needed (see notes below)
-        const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
-        const TUNNEL_URL = "https://appears-deaf-actual-railroad.trycloudflare.com";
-        const LM_STUDIO_URL = CORS_PROXY + TUNNEL_URL + "/v1/chat/completions";
+        // ─── LM STUDIO BACKEND (via Cloudflare Worker) ────────────────────
+        // Replace this with your actual Worker URL
+        const WORKER_URL = "https://openhelper-proxy.tempu3544.workers.dev/"; 
+        const LM_STUDIO_URL = WORKER_URL + "/v1/chat/completions";
 
         async function askAI() {
             const inputField = document.getElementById("query");
@@ -1233,17 +1232,14 @@
             const question = inputField.value.trim();
             if (!question) return;
 
-            // Auto-rename "New Chat" with first question
             if (allSessions[currentSessionId].title === "New Chat") {
                 allSessions[currentSessionId].title = question.length > 22 ? question.substring(0, 22) + "..." : question;
             }
 
-            // Append user message
             chatbox.innerHTML += `<div class="message user">${escapeHtml(question)}</div>`;
             inputField.value = "";
             chatbox.scrollTop = chatbox.scrollHeight;
 
-            // Loading indicator
             const loadingId = "load-" + Date.now();
             chatbox.innerHTML += `<div class="message bot" id="${loadingId}">Thinking… (Code generation may take up to 2 minutes...)</div>`;
             chatbox.scrollTop = chatbox.scrollHeight;
@@ -1274,11 +1270,9 @@
                 const data = await response.json();
                 const answer = data.choices?.[0]?.message?.content || "Sorry, I didn't get a valid response.";
 
-                // Remove loading
                 const loader = document.getElementById(loadingId);
                 if (loader) loader.remove();
 
-                // Render answer with code block and asterisk support
                 const rendered = renderCodeBlocks(answer);
 
                 chatbox.innerHTML += `
@@ -1294,7 +1288,6 @@
                         </div>
                     `;
 
-                // Re-run highlight.js on any newly added code blocks
                 document.querySelectorAll(".code-block-container code.hljs").forEach(el => {
                     hljs.highlightElement(el);
                 });
@@ -1304,7 +1297,7 @@
                 const loader = document.getElementById(loadingId);
                 if (loader) loader.remove();
 
-                let errorMsg = "Could not connect to LM Studio via Cloudflare Tunnel. Make sure the tunnel is running and the CORS proxy is accessible.";
+                let errorMsg = "Could not connect to LM Studio via Cloudflare Worker. Make sure your Worker is deployed and the tunnel is running.";
                 chatbox.innerHTML += `
                         <div class="message bot error">
                             <div class="bot-content-wrapper">
