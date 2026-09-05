@@ -16,7 +16,7 @@ Modern, beautiful and free unlimited latest model usage AI assistant for Windows
 
 ---
 
-## 📖 About
+# 📖 About
 
 OpenHelper is a modern open source AI chatbot designed for Android and Windows.
 
