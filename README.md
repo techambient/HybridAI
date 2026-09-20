@@ -1,3 +1,8 @@
+> [!WARNING]
+> If **no more users** download my app, use my app or star my repo by November 2026, I am **ending this project**.
+
+<br><br>
+
 <div align="center">
 
 <img src="app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" width="180" alt="Ambient HybridAI">
