@@ -1,5 +1,7 @@
-> [!WARNING]
-> If **no more users** download my app, use my app or star my repo by November 2026, I am **ending this project**.
+> [!NOTE]
+> ### ❤️ Special Thanks
+> A massive thank you to **everyone who has downloaded, used, or starred** this repository. Your incredible support keeps this project alive and growing! And also fully thanks to reviewers in **AI Indigo**!! 
+
 
 <br><br>
 
@@ -70,6 +72,17 @@ Whether you're asking questions, writing documents, generating ideas or solving 
 - ARM64 / x64 device
 - Internet connection
 - Minimum 4 GB RAM recommended
+
+---
+
+# 🔍 Reviews & Discoveries
+* <b>AI Indigo (Special Thanks)</b>: [https://aiindigo.com/tool/openhelper-ai-chatbot](https://aiindigo.com/tool/openhelper-ai-chatbot)
+* Microsoft Bing: [https://www.bing.com/search?q=OpenHelper+AI](https://www.bing.com/search?q=OpenHelper+AI)
+* Google AI Search: [https://www.google.com/search?q=OpenHelper+AI](https://www.google.com/search?q=OpenHelper+AI)
+* DuckDuckGo: [https://duckduckgo.com/?ia=web&origin=funnel_home_website&t=h_&q=OpenHelper+AI](https://duckduckgo.com/?ia=web&origin=funnel_home_website&t=h_&q=OpenHelper+AI)
+* Yahoo! Search: [https://search.yahoo.com/search?p=OpenHelper+AI](https://search.yahoo.com/search?p=OpenHelper+AI)
+* Yandex: [https://yandex.com/search?text=OpenHelper+AI](https://yandex.com/search?text=OpenHelper+AI)
+* Brave Search: [https://search.brave.com/search?q=OpenHelper+AI](https://search.brave.com/search?q=OpenHelper+AI)
 
 ---
 
