@@ -75,8 +75,9 @@ Whether you're asking questions, writing documents, generating ideas or solving 
 
 ---
 
-# 🔍 Reviews & Discoveries
+# 🔍 Reviews, Blogs & Discoveries
 * <b>AI Indigo (Special Thanks)</b>: [https://aiindigo.com/tool/openhelper-ai-chatbot](https://aiindigo.com/tool/openhelper-ai-chatbot)
+* Daily Artifact: [https://dailyartifact.ai/story/free-openhelper-ai-chatbot-v2-preview-is-coming-with-many-features-f60h?list=topic%3Allm-and-text-generation](https://dailyartifact.ai/story/free-openhelper-ai-chatbot-v2-preview-is-coming-with-many-features-f60h?list=topic%3Allm-and-text-generation)
 * Microsoft Bing: [https://www.bing.com/search?q=OpenHelper+AI](https://www.bing.com/search?q=OpenHelper+AI)
 * Google AI Search: [https://www.google.com/search?q=OpenHelper+AI](https://www.google.com/search?q=OpenHelper+AI)
 * DuckDuckGo: [https://duckduckgo.com/?ia=web&origin=funnel_home_website&t=h_&q=OpenHelper+AI](https://duckduckgo.com/?ia=web&origin=funnel_home_website&t=h_&q=OpenHelper+AI)
