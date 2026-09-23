@@ -1,6 +1,6 @@
 > [!NOTE]
 > ### ❤️ Special Thanks
-> A massive thank you to **everyone who has downloaded, used, or starred** this repository. Your incredible support keeps this project alive and growing! And also fully thanks to reviewers in **AI Indigo**!! 
+> A massive thank you to **everyone who has downloaded, used, or starred** this repository. Your incredible support keeps this project alive and growing! And also massive thanks to reviewers in **AI Indigo**!! 
 
 
 <br><br>
