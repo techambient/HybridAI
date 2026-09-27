@@ -6,8 +6,10 @@
 <title>OpenHelper — Free & Open Source AI Chatbot</title>
 <link rel="icon" type="image/ico" href="source/icon.ico">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<!-- Google reCAPTCHA API Script -->
+
+<!-- Google reCAPTCHA -->
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 <style>
 :root{
 --bg:#040508;--panel:rgba(255,255,255,.06);--border:rgba(255,255,255,.12);
@@ -30,7 +32,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:99;padding:18px 5%;display:flex;
 h1{font-size:clamp(3rem,8vw,7rem);margin:18px 0;font-weight:900}
 .sub{max-width:850px;margin:auto;color:var(--muted);font-size:1.2rem;line-height:1.8}
 .cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:30px}
-.btn{padding:15px 24px;border-radius:18px;text-decoration:none;color:white;font-weight:700;display:inline-block;border:none;cursor:pointer;font-family:Inter,sans-serif;font-size:1rem}
+.btn{padding:15px 24px;border-radius:18px;text-decoration:none;color:white;font-weight:700}
 .primary{background:linear-gradient(135deg,var(--a),var(--b))}
 .secondary{border:1px solid var(--border);background:#ffffff12}
 section{padding:100px 6%}
@@ -42,45 +44,6 @@ section{padding:100px 6%}
 table{width:100%;border-collapse:collapse}
 td,th{padding:18px;border:1px solid var(--border)}
 footer{text-align:center;padding:70px;color:var(--muted)}
-
-/* Recaptcha container styling */
-.recaptcha-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 24px;
-}
-
-/* Modal overlay styling for button-triggered reCAPTCHA */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(4,5,8,0.8);
-  backdrop-filter: blur(8px);
-  z-index: 99999;
-  display: none;
-  place-items: center;
-  padding: 20px;
-}
-.modal-content {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  backdrop-filter: blur(24px);
-  border-radius: 28px;
-  padding: 30px;
-  text-align: center;
-  max-width: 400px;
-  width: 100%;
-}
-.modal-close {
-  background: transparent;
-  border: none;
-  color: var(--muted);
-  font-size: 1.2rem;
-  cursor: pointer;
-  float: right;
-  margin-top: -10px;
-  margin-right: -10px;
-}
 
 /* Phone & Tablet Optimization Media Queries */
 @media (max-width: 768px) {
@@ -94,13 +57,65 @@ footer{text-align:center;padding:70px;color:var(--muted)}
   .title { font-size: 1.8rem; margin-bottom: 20px; text-align: center; }
   .grid { grid-template-columns: 1fr; gap: 16px; }
   .card { padding: 20px; border-radius: 20px; }
-  .card:hover { transform: none; } /* Prevents awkward sticky hover states on touch screens */
+  .card:hover { transform: none; }
   .metric { font-size: 2.5rem; }
   td, th { padding: 12px 8px; font-size: 0.85rem; }
   footer { padding: 40px 20px; font-size: 0.85rem; }
 }
+
+/* reCAPTCHA modal */
+#captchaOverlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:100000;
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(12px);
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+#captchaBox{
+  width:min(420px,100%);
+  background:rgba(20,22,28,.96);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:28px;
+  box-shadow:0 25px 80px rgba(0,0,0,.55);
+  text-align:center;
+}
+
+#captchaBox h2{
+  margin:0 0 10px;
+  font-size:1.35rem;
+}
+
+#captchaBox p{
+  margin:0 0 22px;
+  color:var(--muted);
+  line-height:1.5;
+}
+
+#captchaContainer{
+  display:flex;
+  justify-content:center;
+  overflow:hidden;
+}
+
+#captchaClose{
+  margin-top:20px;
+  padding:11px 20px;
+  border-radius:14px;
+  border:1px solid var(--border);
+  background:#ffffff10;
+  color:white;
+  cursor:pointer;
+  font-weight:600;
+}
 </style>
 </head>
+
 <body>
 
 <nav>
@@ -115,26 +130,24 @@ footer{text-align:center;padding:70px;color:var(--muted)}
 <div class="badge">The Only Free & Open Source AI Chatbot</div>
 <h1>Solve Anything,<br>Without Limits.</h1>
 <p class="sub">Fast, private and open-sourced. No ads. No tracking. Unlimited usage.</p>
+
 <div class="cta">
-<a class="btn primary" href="#" onclick="openCaptchaModal('https://github.com/techambient/HybridAI'); return false;">View on GitHub</a>
-<a class="btn secondary" href="#" onclick="openCaptchaModal('https://techambient.github.io/HybridAI/chat'); return false;">Chat Now</a>
-</div>
 
-<!-- Web3Forms + Google reCAPTCHA Protected Form Integration -->
-<div style="max-width: 400px; margin: 35px auto 0 auto;">
-<form action="https://api.web3forms.com/submit" method="POST" style="background:var(--panel); border:1px solid var(--border); backdrop-filter:blur(24px); border-radius:24px; padding:20px;">
-<input type="hidden" name="access_key" value="907c9552-4706-44ec-b8fa-57fe4e3e264c">
-<input type="hidden" name="subject" value="New OpenHelper Contact Submission">
-<div style="margin-bottom: 15px;">
-<input type="email" name="email" placeholder="Enter your email to connect..." required style="width: 100%; padding: 12px 16px; border-radius: 12px; border: 1px solid var(--border); background: rgba(255,255,255,.04); color: white; font-family: Inter, sans-serif; outline: none;">
-</div>
-<div class="recaptcha-container">
-<div class="g-recaptcha" data-sitekey="6LcJM9EtAAAAAGEonAslLEXn5-MgLrG8iEPHGH7u"></div>
-</div>
-<button type="submit" class="btn primary" style="width: 100%; margin-top: 15px;">Subscribe / Secure Access</button>
-</form>
-</div>
+<a
+  class="btn primary"
+  href="https://github.com/techambient/HybridAI"
+  data-captcha-url="https://github.com/techambient/HybridAI">
+  View on GitHub
+</a>
 
+<a
+  class="btn secondary"
+  href="https://techambient.github.io/HybridAI/chat"
+  data-captcha-url="https://techambient.github.io/HybridAI/chat">
+  Chat Now
+</a>
+
+</div>
 </div>
 </header>
 
@@ -187,49 +200,154 @@ OpenHelper (formerly HybridAI) • MIT Licensed • TechAmbient
 </footer>
 </div>
 
-<!-- reCAPTCHA Modal Popup for Buttons -->
-<div id="captchaModal" class="modal-overlay">
-  <div class="modal-content">
-    <button class="modal-close" onclick="closeCaptchaModal()">×</button>
-    <h3 style="margin-top: 0; margin-bottom: 15px;">Security Verification</h3>
-    <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 20px;">Please complete the reCAPTCHA to proceed.</p>
-    <div style="display: flex; justify-content: center;">
-      <div id="modalRecaptcha"></div>
+
+<!-- reCAPTCHA MODAL -->
+<div id="captchaOverlay">
+
+  <div id="captchaBox">
+
+    <h2>Verification Required</h2>
+
+    <p>
+      Please complete the verification below to continue.
+    </p>
+
+    <div id="captchaContainer">
+      <div
+        class="g-recaptcha"
+        data-sitekey="6LcJM9EtAAAAAGEonAslLEXn5-MgLrG8iEPHGH7u"
+        data-callback="captchaSuccess"
+        data-expired-callback="captchaExpired"
+        data-error-callback="captchaError">
+      </div>
     </div>
+
+    <button id="captchaClose" type="button">
+      Cancel
+    </button>
+
   </div>
+
 </div>
 
+
 <script>
-let targetRedirectUrl = "";
-let modalWidgetId = null;
 
-function openCaptchaModal(url) {
-  targetRedirectUrl = url;
-  const modal = document.getElementById("captchaModal");
-  modal.style.display = "grid";
-  
-  if (modalWidgetId === null && window.grecaptcha) {
-    modalWidgetId = grecaptcha.render('modalRecaptcha', {
-      'sitekey': '6LcJM9EtAAAAAGEonAslLEXn5-MgLrG8iEPHGH7u',
-      'callback': onModalCaptchaSuccess
-    });
-  } else if (window.grecaptcha && modalWidgetId !== null) {
-    grecaptcha.reset(modalWidgetId);
+let pendingURL = null;
+
+
+/*
+ * Intercept BOTH buttons.
+ * Nothing is opened until reCAPTCHA succeeds.
+ */
+document.querySelectorAll('[data-captcha-url]').forEach(button => {
+
+  button.addEventListener('click', function(event) {
+
+    event.preventDefault();
+
+    pendingURL = this.dataset.captchaUrl;
+
+    document.getElementById('captchaOverlay').style.display = 'flex';
+
+    /*
+     * Reset previous CAPTCHA state when opening again.
+     */
+    if (typeof grecaptcha !== 'undefined') {
+      try {
+        grecaptcha.reset();
+      } catch(e) {}
+    }
+
+  });
+
+});
+
+
+/*
+ * Called automatically by Google reCAPTCHA
+ * after the user successfully completes verification.
+ */
+function captchaSuccess(token) {
+
+  if (!token || !pendingURL) {
+    return;
   }
+
+  const destination = pendingURL;
+
+  /*
+   * Clear the pending destination first.
+   */
+  pendingURL = null;
+
+  /*
+   * Hide CAPTCHA.
+   */
+  document.getElementById('captchaOverlay').style.display = 'none';
+
+  /*
+   * Redirect ONLY after successful CAPTCHA.
+   */
+  window.location.href = destination;
 }
 
-function closeCaptchaModal() {
-  document.getElementById("captchaModal").style.display = "none";
-  targetRedirectUrl = "";
+
+/*
+ * CAPTCHA expired.
+ */
+function captchaExpired() {
+  pendingURL = null;
 }
 
-function onModalCaptchaSuccess(token) {
-  if (targetRedirectUrl) {
-    setTimeout(() => {
-      window.location.href = targetRedirectUrl;
-    }, 500);
+
+/*
+ * CAPTCHA error.
+ */
+function captchaError() {
+  pendingURL = null;
+}
+
+
+/*
+ * Cancel button.
+ */
+document.getElementById('captchaClose').addEventListener('click', function() {
+
+  pendingURL = null;
+
+  document.getElementById('captchaOverlay').style.display = 'none';
+
+  if (typeof grecaptcha !== 'undefined') {
+    try {
+      grecaptcha.reset();
+    } catch(e) {}
   }
-}
+
+});
+
+
+/*
+ * Close the CAPTCHA by clicking outside the box.
+ */
+document.getElementById('captchaOverlay').addEventListener('click', function(event) {
+
+  if (event.target === this) {
+
+    pendingURL = null;
+
+    this.style.display = 'none';
+
+    if (typeof grecaptcha !== 'undefined') {
+      try {
+        grecaptcha.reset();
+      } catch(e) {}
+    }
+
+  }
+
+});
+
 </script>
 
 </body>
