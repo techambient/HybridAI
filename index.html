@@ -50,6 +50,38 @@ footer{text-align:center;padding:70px;color:var(--muted)}
   margin-top: 24px;
 }
 
+/* Modal overlay styling for button-triggered reCAPTCHA */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(4,5,8,0.8);
+  backdrop-filter: blur(8px);
+  z-index: 99999;
+  display: none;
+  place-items: center;
+  padding: 20px;
+}
+.modal-content {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(24px);
+  border-radius: 28px;
+  padding: 30px;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+.modal-close {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 1.2rem;
+  cursor: pointer;
+  float: right;
+  margin-top: -10px;
+  margin-right: -10px;
+}
+
 /* Phone & Tablet Optimization Media Queries */
 @media (max-width: 768px) {
   nav { padding: 14px 6%; font-size: 0.9rem; }
@@ -68,23 +100,6 @@ footer{text-align:center;padding:70px;color:var(--muted)}
   footer { padding: 40px 20px; font-size: 0.85rem; }
 }
 </style>
-<script>
-// Function that intercepts button clicks, checks reCAPTCHA, and redirects only on success
-function verifyAndRedirect(event, targetUrl) {
-  event.preventDefault();
-  
-  // Check if reCAPTCHA response token exists
-  var recaptchaResponse = grecaptcha.getResponse();
-  
-  if (recaptchaResponse.length === 0) {
-    alert("Please complete the reCAPTCHA verification ('I'm not a robot') before proceeding!");
-    return false;
-  }
-  
-  // If verified, proceed to destination URL
-  window.location.href = targetUrl;
-}
-</script>
 </head>
 <body>
 
@@ -101,8 +116,8 @@ function verifyAndRedirect(event, targetUrl) {
 <h1>Solve Anything,<br>Without Limits.</h1>
 <p class="sub">Fast, private and open-sourced. No ads. No tracking. Unlimited usage.</p>
 <div class="cta">
-<a class="btn primary" href="https://github.com/techambient/HybridAI" onclick="verifyAndRedirect(event, 'https://github.com/techambient/HybridAI')">View on GitHub</a>
-<a class="btn secondary" href="https://techambient.github.io/HybridAI/chat" onclick="verifyAndRedirect(event, 'https://techambient.github.io/HybridAI/chat')">Chat Now</a>
+<a class="btn primary" href="#" onclick="openCaptchaModal('https://github.com/techambient/HybridAI'); return false;">View on GitHub</a>
+<a class="btn secondary" href="#" onclick="openCaptchaModal('https://techambient.github.io/HybridAI/chat'); return false;">Chat Now</a>
 </div>
 
 <!-- Web3Forms + Google reCAPTCHA Protected Form Integration -->
@@ -171,6 +186,51 @@ function verifyAndRedirect(event, targetUrl) {
 OpenHelper (formerly HybridAI) • MIT Licensed • TechAmbient
 </footer>
 </div>
+
+<!-- reCAPTCHA Modal Popup for Buttons -->
+<div id="captchaModal" class="modal-overlay">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeCaptchaModal()">×</button>
+    <h3 style="margin-top: 0; margin-bottom: 15px;">Security Verification</h3>
+    <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 20px;">Please complete the reCAPTCHA to proceed.</p>
+    <div style="display: flex; justify-content: center;">
+      <div id="modalRecaptcha"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+let targetRedirectUrl = "";
+let modalWidgetId = null;
+
+function openCaptchaModal(url) {
+  targetRedirectUrl = url;
+  const modal = document.getElementById("captchaModal");
+  modal.style.display = "grid";
+  
+  if (modalWidgetId === null && window.grecaptcha) {
+    modalWidgetId = grecaptcha.render('modalRecaptcha', {
+      'sitekey': '6LcJM9EtAAAAAGEonAslLEXn5-MgLrG8iEPHGH7u',
+      'callback': onModalCaptchaSuccess
+    });
+  } else if (window.grecaptcha && modalWidgetId !== null) {
+    grecaptcha.reset(modalWidgetId);
+  }
+}
+
+function closeCaptchaModal() {
+  document.getElementById("captchaModal").style.display = "none";
+  targetRedirectUrl = "";
+}
+
+function onModalCaptchaSuccess(token) {
+  if (targetRedirectUrl) {
+    setTimeout(() => {
+      window.location.href = targetRedirectUrl;
+    }, 500);
+  }
+}
+</script>
 
 </body>
 </html>
